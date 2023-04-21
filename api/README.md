@@ -1,12 +1,26 @@
 # API
 How to use the API.
 
-## Authentication
-To send api requests each request need to include the current api_key. The api_key has to be send in the http header as `api_key`.
+## Setup
 
-Example in Postmen:
-![Example in Postmen](../assets/img/api_key_example.png)
+### 1. .env
 
-## Postmen
+Create a .env file in the root directory of the project. The .env file should contain the following variables:
 
-All the api requests are documented in the [postman collection](../assets/postman/StudyCopilot.postman_collection.json). Import this file to get a view of all the api requests.
+```
+# JWT SECRET
+JWT_SECRET=your_secret
+
+# MYSQL DATABASE CONFIGURATION
+MYSQL_HOST = 'localhost'
+MYSQL_USER = 'development'
+MYSQL_PASSWORD = 'test'
+```
+
+### 2. Start API
+
+Start api using the following command:
+
+```
+npm run start
+```
