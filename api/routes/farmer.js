@@ -52,6 +52,8 @@ router.post("/login", async (req, res) => {
 
       // set session token
       req.session.token = token;
+
+      res.send("Login successful");
     }
   );
 });
