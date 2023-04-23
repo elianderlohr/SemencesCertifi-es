@@ -25,7 +25,6 @@ router.get("/", function (req, res, next) {
           title: "API v1 - Health check",
           db: dbOnline,
           lastChecked: new Date(),
-          correctAPIKey: correctAPIKey,
         });
       }
     );
@@ -37,7 +36,6 @@ router.get("/", function (req, res, next) {
       title: "API",
       db: dbOnline,
       lastChecked: new Date(),
-      correctAPIKey: correctAPIKey,
     });
   }
 });

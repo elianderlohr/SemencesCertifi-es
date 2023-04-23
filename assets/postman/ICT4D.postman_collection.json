@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "9fccc738-275c-4960-a3a1-81f70d7b2df9",
+		"name": "ICT4D",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "laboratory",
+			"item": [
+				{
+					"name": "Login into Laboratory User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"lb1\",\r\n    \"password\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}laboratory/login",
+							"host": [
+								"{{url}}laboratory"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout Laboratory User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"lb1\",\r\n    \"password\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}laboratory/logout",
+							"host": [
+								"{{url}}laboratory"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check if Laboratory User is signed in",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"lb1\",\r\n    \"password\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}laboratory/signedin",
+							"host": [
+								"{{url}}laboratory"
+							],
+							"path": [
+								"signedin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Account Info of Laboratory User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}laboratory/account",
+							"host": [
+								"{{url}}laboratory"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "farmer",
+			"item": [
+				{
+					"name": "Login into Farmer User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"06127366822\",\r\n    \"pin\": \"1972\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/laboratory/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"laboratory",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout Farmer User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"lb1\",\r\n    \"password\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}farmer/logout",
+							"host": [
+								"{{url}}farmer"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check if Farmer User is signed in",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"lb1\",\r\n    \"password\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}farmer/signedin",
+							"host": [
+								"{{url}}farmer"
+							],
+							"path": [
+								"signedin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Account Info of Farmer User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}farmer/account",
+							"host": [
+								"{{url}}farmer"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "certificate",
+			"item": [
+				{
+					"name": "Add new certificate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"081273912321\",\r\n    \"pin\": 1231,\r\n    \"species\": \"Millet\",\r\n    \"campaign\": \"2019-2020\",\r\n    \"germination\": 0.98,\r\n    \"variety\": \"Tooniou C1\",\r\n    \"batch_number\": 31,\r\n    \"purity\": 0.996\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}certificate/",
+							"host": [
+								"{{url}}certificate"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update certificate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"phone\": \"081273912321\",\r\n    \"pin\": 1231,\r\n    \"species\": \"Millet\",\r\n    \"campaign\": \"2019-2020\",\r\n    \"germination\": 0.98,\r\n    \"variety\": \"NEW VARIETY\",\r\n    \"batch_number\": 31,\r\n    \"purity\": 0.996\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}certificate/update",
+							"host": [
+								"{{url}}certificate"
+							],
+							"path": [
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete certificate",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}certificate",
+							"host": [
+								"{{url}}certificate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show certificate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}certificate/88544",
+							"host": [
+								"{{url}}certificate"
+							],
+							"path": [
+								"88544"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://api.semencescertifiees.elch.cc/",
+			"type": "default"
+		}
+	]
+}

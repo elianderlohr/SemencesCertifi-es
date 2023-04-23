@@ -104,8 +104,14 @@ if (process.env.NODE_ENV === "production") {
 // index
 app.use("/", require("./routes/index"));
 
-// ROUTING
-app.use("/v1/users/", require("./routes/users"));
+// ROUTING - FARMER
+app.use("/farmer/", require("./routes/farmer"));
+
+// ROUTING - LABORATORY
+app.use("/laboratory/", require("./routes/laboratory"));
+
+// ROUTING - CERTIFICATE
+app.use("/certificate/", require("./routes/certificate"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

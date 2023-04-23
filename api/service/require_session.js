@@ -6,10 +6,9 @@ require("dotenv").config({ path: require("find-config")(".env") });
 // import jwt
 const jwt = require("jsonwebtoken");
 
-
-async function requireSession(req, res, next) {
+async function requireFarmerSession(req, res, next) {
   if (!req.session.token) {
-    req.send("No active session")
+    res.send("No active session");
   } else {
     // check if token is still active and valid
     jwt.verify(
@@ -17,10 +16,41 @@ async function requireSession(req, res, next) {
       process.env.JWT_SECRET,
       async function (err, decoded) {
         if (err) {
-          req.send("Session expired")
+          res.send("Session expired");
         } else {
-          // token is valid
+          const role = decoded.role;
 
+          if (role !== "farmer") {
+            res.send("Wrong role");
+          }
+
+          // token is valid
+          next();
+        }
+      }
+    );
+  }
+}
+
+async function requireLaboratorySession(req, res, next) {
+  if (!req.session.token) {
+    res.send("No active session");
+  } else {
+    // check if token is still active and valid
+    jwt.verify(
+      req.session.token,
+      process.env.JWT_SECRET,
+      async function (err, decoded) {
+        if (err) {
+          res.send("Session expired");
+        } else {
+          const role = decoded.role;
+
+          if (role !== "laboratory") {
+            res.send("Wrong role");
+          }
+
+          // token is valid
           next();
         }
       }
@@ -29,4 +59,4 @@ async function requireSession(req, res, next) {
 }
 
 // export the function
-module.exports = requireSession;
+module.exports = { requireFarmerSession, requireLaboratorySession };
