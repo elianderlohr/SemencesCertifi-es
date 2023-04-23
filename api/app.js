@@ -101,6 +101,9 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+// index
+app.use("/", require("./routes/index"));
+
 // ROUTING
 app.use("/v1/users/", require("./routes/users"));
 
