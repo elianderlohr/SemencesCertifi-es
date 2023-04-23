@@ -9,7 +9,6 @@ require("dotenv").config({ path: require("find-config")(".env") });
 var express = require("express");
 var router = express.Router();
 
-
 // *********************************************
 // *                                           *
 // *       FARMER ROUTES - ACCOUNT             *
@@ -39,8 +38,7 @@ router.post("/login", async (req, res) => {
         return res.status(401).send("Error: User does not exist");
       }
 
-      if (user[0].pin !== pin)
-      {
+      if (user[0].pin !== pin) {
         return res.status(401).send("Error: Wrong pin");
       }
 
@@ -93,7 +91,8 @@ router.get("/signedin", async (req, res) => {
         }
 
         return res.json({ loggedIn: true, userId: userId });
-      });
+      }
+    );
   } catch (err) {
     return res.json({ loggedIn: false });
   }
@@ -113,26 +112,23 @@ router.post("/logout", requirements.requireFarmerSession, (req, res) => {
 });
 
 // Set up a route to get the user info
-router.post(
-  "/account",
-  async (req, res) => {
-    // get user id from token
-    const decoded = jwt.verify(req.session.token, process.env.JWT_SECRET);
-    const userId = decoded.userId;
+router.post("/account", async (req, res) => {
+  // get user id from token
+  const decoded = jwt.verify(req.session.token, process.env.JWT_SECRET);
+  const userId = decoded.userId;
 
-    // get user from database syncronously
-    database.pool.query(
-      "SELECT `id`, `phone`, `signup_date`, (SELECT COUNT(*) FROM ict4d.t_certificate c WHERE c.farmer_id = f.id) AS certificates FROM ict4d.t_user_farmer f WHERE f.id = ?;",
-      [userId],
-      async (error, user) => {
-        if (error) {
-          return res.status(500).send("Error: Server error");
-        }
-        return res.send(user[0]);
+  // get user from database syncronously
+  database.pool.query(
+    "SELECT `id`, `phone`, `signup_date`, (SELECT COUNT(*) FROM ict4d.t_certificate c WHERE c.farmer_id = f.id) AS certificates FROM ict4d.t_user_farmer f WHERE f.id = ?;",
+    [userId],
+    async (error, user) => {
+      if (error) {
+        return res.status(500).send("Error: Server error");
       }
-    );
-  }
-);
+      return res.send(user[0]);
+    }
+  );
+});
 
 // *********************************************
 // *                                           *
@@ -141,8 +137,9 @@ router.post(
 // *********************************************
 
 // Set up a route to get the user certificates
-router.post(
-  "/certificates", requirements.requireFarmerSession,
+router.get(
+  "/certificates",
+  requirements.requireFarmerSession,
   async (req, res) => {
     // get user id from token
     const decoded = jwt.verify(req.session.token, process.env.JWT_SECRET);
@@ -150,18 +147,17 @@ router.post(
 
     // get certificates from database
     database.pool.query(
-      "SELECT * FROM `t_certificate` WHERE `farmer_id` = ?"
+      "SELECT * FROM ict4d.t_certificate WHERE `farmer_id` = ?;",
       [userId],
-      async (error, certificates) => {
+      async (error, certificate) => {
         if (error) {
           return res.status(500).send("Error: Server error");
         }
 
-        return res.send(certificates);
+        return res.status(200).send(certificate);
       }
     );
   }
 );
-
 
 module.exports = router;

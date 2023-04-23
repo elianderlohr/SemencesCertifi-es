@@ -201,8 +201,61 @@ router.delete("/", requirements.requireLaboratorySession, async (req, res) => {
   );
 });
 
-// Set up a route to get a certificate
+// Set up route to get certificate by normal id
 router.get("/:id", async (req, res) => {
+    const id = req.params.id;
+
+    // check if session exists
+    if (!req.session.token) {
+        return res.status(401).send("Error: Not logged in");
+    }
+    // get user id from token
+    const token = req.session.token;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.userId;
+
+    // do laboratory check
+    if (decoded.role === "laboratory") {
+        // check if certificate exists and belongs to laboratory
+        database.pool.query(
+            "SELECT * FROM ict4d.t_certificate WHERE `id` = ? AND `laboratory_id` = ?;",   
+            [id, userId],
+            async (error, certificate) => {
+                if (error) {
+                    return res.status(500).send("Error: Server error");
+                }
+
+                if (certificate.length === 0) {
+                    return res.status(401).send("Error: Not authorized");
+                }
+
+                return res.status(200).send(certificate[0]);
+            }
+        );
+    } else if (decoded.role === "farmer") {
+        // check if certificate exists and belongs to farmer
+        database.pool.query(
+            "SELECT * FROM ict4d.t_certificate WHERE `id` = ? AND `farmer_id` = ?;",   
+            [id, userId],
+            async (error, certificate) => {
+                if (error) {
+                    return res.status(500).send("Error: Server error");
+                }
+
+                if (certificate.length === 0) {
+                    return res.status(401).send("Error: Not authorized");
+                }
+
+                return res.status(200).send(certificate[0]);
+            }
+        );
+    } else {
+        return res.status(401).send("Error: Not authorized");
+    }
+});
+
+// Set up a route to get a certificate
+router.get("/view/:id", async (req, res) => {
   const id = req.params.id;
 
   // get certificate
@@ -214,7 +267,7 @@ router.get("/:id", async (req, res) => {
         return res.status(500).send("Error: Server error");
       }
 
-      return res.status(200).send(certificate);
+      return res.status(200).send(certificate[0]);
     }
   );
 });

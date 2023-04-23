@@ -139,7 +139,7 @@ router.post(
 // *********************************************
 
 // Set up a route to get the user certificates
-router.post(
+router.get(
   "/certificates", requirements.requireLaboratorySession,
   async (req, res) => {
     // get user id from token
@@ -148,14 +148,14 @@ router.post(
 
     // get certificates from database
     database.pool.query(
-      "SELECT * FROM `t_certificate` WHERE `laboratory_id` = ?"
+      "SELECT * FROM ict4d.t_certificate WHERE `laboratory_id` = ?;",
       [userId],
-      async (error, certificates) => {
+      async (error, certificate) => {
         if (error) {
           return res.status(500).send("Error: Server error");
         }
 
-        return res.send(certificates);
+        return res.status(200).send(certificate);
       }
     );
   }
