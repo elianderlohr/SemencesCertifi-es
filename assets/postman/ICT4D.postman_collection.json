@@ -105,6 +105,23 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Laboratory User Certficiates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}laboratory/certificates",
+							"host": [
+								"{{url}}laboratory"
+							],
+							"path": [
+								"certificates"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -118,7 +135,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"phone\": \"06127366822\",\r\n    \"pin\": \"1972\"\r\n}",
+							"raw": "{\r\n    \"phone\": \"081273912321\",\r\n    \"pin\": 1231\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -126,12 +143,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/laboratory/login",
+							"raw": "{{url}}farmer/login",
 							"host": [
-								"{{url}}"
+								"{{url}}farmer"
 							],
 							"path": [
-								"laboratory",
 								"login"
 							]
 						}
@@ -143,15 +159,6 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"lb1\",\r\n    \"password\": \"test\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{url}}farmer/logout",
 							"host": [
@@ -205,6 +212,23 @@
 							],
 							"path": [
 								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Farmer User Certficiates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}farmer/certificates",
+							"host": [
+								"{{url}}farmer"
+							],
+							"path": [
+								"certificates"
 							]
 						}
 					},
@@ -296,12 +320,42 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}certificate/88544",
+							"raw": "{{url}}certificate/view/:viewId",
 							"host": [
 								"{{url}}certificate"
 							],
 							"path": [
-								"88544"
+								"view",
+								":viewId"
+							],
+							"variable": [
+								{
+									"key": "viewId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One certificate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}certificate/:id",
+							"host": [
+								"{{url}}certificate"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
 							]
 						}
 					},
@@ -347,7 +401,7 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "https://api.semencescertifiees.elch.cc/",
+			"value": "https://api-semencescertifiees.elch.cc/",
 			"type": "default"
 		}
 	]
