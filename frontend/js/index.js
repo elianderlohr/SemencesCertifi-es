@@ -15,9 +15,12 @@ const _handleSignedIn = () => {
         success: function (user, textStatus, xhr) {
 
             if (xhr.status === 200) {
-                alert("You are signed in");
+                if (user.loggedIn)
+                    alert("You are signed in");
+                else
+                    alert("You are not signed in");
             } else {
-                alert("You are not signed in");
+                alert("Error");
             }
         },
         error: function (xhr, textStatus, errorThrown) {
