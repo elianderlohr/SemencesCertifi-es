@@ -6,7 +6,7 @@ const _handleSignedIn = () => {
         url: `${
           domain.includes("localhost")
             ? "http://localhost:3000"
-            : "https://api-semencescertifiees.elch.cc/"
+            : "https://api.semencescertifiees.elch.cc/"
         }laboratory/signedin`,
         type: "GET",
         xhrFields: {
