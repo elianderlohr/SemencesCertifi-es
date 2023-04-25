@@ -51,20 +51,53 @@
         outline: 0;
         display: inline-block;
         padding: 20px 40px;
-        color: black;
-        background-color: #ddd;
+        color: #fff;
+        background-color: #F1C40F;
         text-align: center;
         cursor: pointer;
-        font-size: 24px; /* reduce the font size for small screens */
-        margin: 10px; /* add some margin between the buttons */
-        flex-basis: 250px; /* set a fixed width for the buttons */
+        font-size: 24px;
+        margin: 10px;
+        flex-basis: 250px;
+        border-radius: 50px; /* add a border radius to make the button more rounded */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08); /* add a box shadow to make the button appear elevated */
+        text-transform: uppercase; /* convert the button text to uppercase */
+        letter-spacing: 2px; /* add some letter spacing to the button text */
+        transition: all 0.3s ease-in-out; /* add a transition effect to the button */
       }
+      
+      .button:hover {
+        background-color: #E67E22; /* change the button color on hover */
+        transform: scale(1.1); /* add a scale effect to the button on hover */
+        box-shadow: 0 6px 8px rgba(0,0,0,0.2), 0 3px 6px rgba(0,0,0,0.12); /* adjust the box shadow on hover */
+      }
+      
 
       .button2 {
         position: absolute;
         top: 10px;
         right: 20px;
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #2C3E50;
+        text-align: center;
+        cursor: pointer;
+        font-size: 18px;
+        border-radius: 30px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s ease-in-out;
       }
+      
+      .button2:hover {
+        background-color: #34495E;
+        transform: scale(1.1);
+        box-shadow: 0 6px 8px rgba(0,0,0,0.2), 0 3px 6px rgba(0,0,0,0.12);
+      }
+      
 
       /* adjust the size and margin of the images depending on the screen size */
       .button-container img:first-child {
@@ -116,7 +149,7 @@
         
         <div class="button-container">
             <img src="img/Logo.png" alt="Logo" />
-            <a href="login">
+            <a href="login/sign-in.html">
               <button class="button">Press to See Certification</button>
             </a>
             <a href="certificates/index.html">
@@ -125,7 +158,7 @@
           </div>
           
           <div class="button2">
-            <a href="sign-in.html">
+            <a href="login/sign-in.html">
               <button>Log In</button>
             </a>
           </div>
