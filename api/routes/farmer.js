@@ -26,7 +26,7 @@ router.post("/login", async (req, res) => {
 
   // check if user exists
   database.pool.query(
-    "SELECT * FROM ict4d.t_user_farmer WHERE phone = ?;",
+    "SELECT * FROM " + database.getDatabase() + ".t_user_farmer WHERE phone = ?;",
     [phone],
     async (error, user) => {
       if (error) {
@@ -73,7 +73,7 @@ router.get("/signedin", async (req, res) => {
 
     // get user info from database
     database.pool.query(
-      "SELECT * FROM ict4d.t_user_farmer WHERE id = ?;",
+      "SELECT * FROM " + database.getDatabase() + ".t_user_farmer WHERE id = ?;",
       [userId],
       async (error, user) => {
         if (error) {
@@ -119,7 +119,7 @@ router.post("/account", async (req, res) => {
 
   // get user from database syncronously
   database.pool.query(
-    "SELECT `id`, `phone`, `signup_date`, (SELECT COUNT(*) FROM ict4d.t_certificate c WHERE c.farmer_id = f.id) AS certificates FROM ict4d.t_user_farmer f WHERE f.id = ?;",
+    "SELECT `id`, `phone`, `signup_date`, (SELECT COUNT(*) FROM " + database.getDatabase() + ".t_certificate c WHERE c.farmer_id = f.id) AS certificates FROM " + database.getDatabase() + ".t_user_farmer f WHERE f.id = ?;",
     [userId],
     async (error, user) => {
       if (error) {
@@ -147,7 +147,7 @@ router.get(
 
     // get certificates from database
     database.pool.query(
-      "SELECT * FROM ict4d.t_certificate WHERE `farmer_id` = ?;",
+      "SELECT * FROM " + database.getDatabase() + ".t_certificate WHERE `farmer_id` = ?;",
       [userId],
       async (error, certificate) => {
         if (error) {

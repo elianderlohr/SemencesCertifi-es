@@ -23,9 +23,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-var MemoryStore = session.MemoryStore;
 
 if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+
   // Session
   app.use(
     session({

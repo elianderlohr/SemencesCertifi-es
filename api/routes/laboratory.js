@@ -26,7 +26,7 @@ router.post("/login", async (req, res) => {
 
   // check if user exists
   database.pool.query(
-    "SELECT * FROM ict4d.t_user_laboratory WHERE username = ?;",
+    "SELECT * FROM " + database.getDatabase() + ".t_user_laboratory WHERE username = ?;",
     [username],
     async (error, user) => {
       if (error) {
@@ -74,7 +74,7 @@ router.get("/signedin", async (req, res) => {
 
     // get user info from database
     database.pool.query(
-      "SELECT * FROM ict4d.t_user_laboratory WHERE id = ?;",
+      "SELECT * FROM " + database.getDatabase() + ".t_user_laboratory WHERE id = ?;",
       [userId],
       async (error, user) => {
         if (error) {
@@ -120,7 +120,7 @@ router.post(
 
     // get user from database syncronously
     database.pool.query(
-      "SELECT `id`, `username`, `signup_date`, (SELECT COUNT(*) FROM ict4d.t_certificate c WHERE c.laboratory_id = l.id) AS certificates FROM ict4d.t_user_laboratory l WHERE l.id = ?;",
+      "SELECT `id`, `username`, `signup_date`, (SELECT COUNT(*) FROM " + database.getDatabase() + ".t_certificate c WHERE c.laboratory_id = l.id) AS certificates FROM " + database.getDatabase() + ".t_user_laboratory l WHERE l.id = ?;",
       [userId],
       async (error, user) => {
         if (error) {
@@ -148,7 +148,7 @@ router.get(
 
     // get certificates from database
     database.pool.query(
-      "SELECT * FROM ict4d.t_certificate WHERE `laboratory_id` = ?;",
+      "SELECT * FROM " + database.getDatabase() + ".t_certificate WHERE `laboratory_id` = ?;",
       [userId],
       async (error, certificate) => {
         if (error) {
