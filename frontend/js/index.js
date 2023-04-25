@@ -5,7 +5,7 @@ const _handleSignedIn = () => {
     $.ajax({
         url: `${
           domain.includes("localhost")
-            ? "http://localhost:3000"
+            ? "https://dev.semencescertifiees.elch.cc/"
             : "https://api.semencescertifiees.elch.cc/"
         }laboratory/signedin`,
         type: "GET",
@@ -24,7 +24,7 @@ const _handleSignedIn = () => {
             }
         },
         error: function (xhr, textStatus, errorThrown) {
-            alert("Error");
+            alert(errorThrown);
         },
     });
 };
