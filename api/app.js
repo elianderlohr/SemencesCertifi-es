@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === "production") {
       name: "SemencesCertifieesEssential",
       secret: process.env.JWT_SECRET,
       resave: false,
-      saveUninitialized: true
+      saveUninitialized: true,
       cookie: {
         secure: true,
         maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -69,7 +69,7 @@ if (process.env.NODE_ENV === "production") {
       name: "SemencesCertifieesEssential",
       secret: process.env.JWT_SECRET,
       resave: false,
-      saveUninitialized: true
+      saveUninitialized: true,
       cookie: {
         secure: false,
         maxAge: 30 * 24 * 60 * 60 * 1000,
