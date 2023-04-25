@@ -7,7 +7,7 @@ const _handleSignedIn = () => {
           domain.includes("localhost")
             ? "http://localhost:3000"
             : "https://api-semencescertifiees.elch.cc/"
-        }/laboratory/signedin`,
+        }laboratory/signedin`,
         type: "GET",
         xhrFields: {
           withCredentials: true,
@@ -21,7 +21,7 @@ const _handleSignedIn = () => {
             }
         },
         error: function (xhr, textStatus, errorThrown) {
-            alert("You are not signed in");
+            alert("Error");
         },
     });
 };
