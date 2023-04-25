@@ -24,3 +24,14 @@ Start api using the following command:
 ```
 npm run start
 ```
+
+## Usage
+
+The API can be accessed using the following endpoints:
+[https://api-semencescertifiees.elch.cc](https://api-semencescertifiees.elch.cc)
+
+### API Documentation
+
+The API is documented using Postman. The documentation file can be found under [`assets\postman\ICT4D.postman_collection.json`](assets\postman\ICT4D.postman_collection.json).
+
+Import the file into Postman to view the documentation.
