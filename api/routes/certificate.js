@@ -46,7 +46,7 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
 
   // check if user exists
   database.pool.query(
-    "SELECT * FROM " + database.getDatabase() + ".t_user_farmer WHERE phone = ?;",
+    "SELECT * FROM ict4d.t_user_farmer WHERE phone = ?;",
     [phone],
     async (error, user) => {
       if (error) {
@@ -58,7 +58,7 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
         console.log("User does not exist");
         // Create new user
         database.pool.query(
-          "INSERT INTO " + database.getDatabase() + ".t_user_farmer (phone, pin) VALUES (?, ?);",
+          "INSERT INTO ict4d.t_user_farmer (phone, pin) VALUES (?, ?);",
           [phone, pin],
           async (error, newUser) => {
             if (error) {
@@ -67,7 +67,7 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
 
             // Create certificate
             database.pool.query(
-              "INSERT INTO " + database.getDatabase() + ".t_certificate (`farmer_id`, `view_id`, `laboratory_id`, `species`, `campaign`, `germination`, `variety`, `batch_number`, `purity`) VALUES (?, FLOOR(RAND() * 90000) + 10000, ?, ?, ?, ?, ?, ?, ?);",
+              "INSERT INTO ict4d.t_certificate (`farmer_id`, `view_id`, `laboratory_id`, `species`, `campaign`, `germination`, `variety`, `batch_number`, `purity`) VALUES (?, FLOOR(RAND() * 90000) + 10000, ?, ?, ?, ?, ?, ?, ?);",
               [
                 newUser.insertId,
                 laboratory_id,
@@ -91,7 +91,7 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
       } else {
         // Update pin
         database.pool.query(
-          "UPDATE " + database.getDatabase() + ".t_user_farmer SET pin = ? WHERE phone = ?;",
+          "UPDATE ict4d.t_user_farmer SET pin = ? WHERE phone = ?;",
           [pin, phone],
           async (error, _) => {
             if (error) {
@@ -100,7 +100,7 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
 
             // Create certificate
             database.pool.query(
-              "INSERT INTO " + database.getDatabase() + ".t_certificate (`farmer_id`, `view_id`, `laboratory_id`, `species`, `campaign`, `germination`, `variety`, `batch_number`, `purity`) VALUES (?, FLOOR(RAND() * 90000) + 10000, ?, ?, ?, ?, ?, ?, ?);",
+              "INSERT INTO ict4d.t_certificate (`farmer_id`, `view_id`, `laboratory_id`, `species`, `campaign`, `germination`, `variety`, `batch_number`, `purity`) VALUES (?, FLOOR(RAND() * 90000) + 10000, ?, ?, ?, ?, ?, ?, ?);",
               [
                 user[0].id,
                 laboratory_id,
@@ -152,7 +152,7 @@ router.post(
 
     // update certificate
     database.pool.query(
-      "UPDATE " + database.getDatabase() + ".t_certificate SET `species` = ?, `campaign` = ?, `germination` = ?, `variety` = ?, `batch_number` = ?, `purity` = ? WHERE `id` = ? AND `laboratory_id` = ?;",
+      "UPDATE ict4d.t_certificate SET `species` = ?, `campaign` = ?, `germination` = ?, `variety` = ?, `batch_number` = ?, `purity` = ? WHERE `id` = ? AND `laboratory_id` = ?;",
       [
         species,
         campaign,
@@ -189,7 +189,7 @@ router.delete("/", requirements.requireLaboratorySession, async (req, res) => {
 
   // delete certificate
   database.pool.query(
-    "DELETE FROM " + database.getDatabase() + ".t_certificate WHERE `id` = ? AND `laboratory_id` = ?;",
+    "DELETE FROM ict4d.t_certificate WHERE `id` = ? AND `laboratory_id` = ?;",
     [id, laboratory_id],
     async (error, certificate) => {
       if (error) {
@@ -218,7 +218,7 @@ router.get("/:id", async (req, res) => {
     if (decoded.role === "laboratory") {
         // check if certificate exists and belongs to laboratory
         database.pool.query(
-            "SELECT * FROM " + database.getDatabase() + ".t_certificate WHERE `id` = ? AND `laboratory_id` = ?;",   
+            "SELECT * FROM ict4d.t_certificate WHERE `id` = ? AND `laboratory_id` = ?;",   
             [id, userId],
             async (error, certificate) => {
                 if (error) {
@@ -235,7 +235,7 @@ router.get("/:id", async (req, res) => {
     } else if (decoded.role === "farmer") {
         // check if certificate exists and belongs to farmer
         database.pool.query(
-            "SELECT * FROM " + database.getDatabase() + ".t_certificate WHERE `id` = ? AND `farmer_id` = ?;",   
+            "SELECT * FROM ict4d.t_certificate WHERE `id` = ? AND `farmer_id` = ?;",   
             [id, userId],
             async (error, certificate) => {
                 if (error) {
@@ -260,7 +260,7 @@ router.get("/view/:id", async (req, res) => {
 
   // get certificate
   database.pool.query(
-    "SELECT * FROM " + database.getDatabase() + ".t_certificate WHERE `view_id` = ?;",
+    "SELECT * FROM ict4d.t_certificate WHERE `view_id` = ?;",
     [id],
     async (error, certificate) => {
       if (error) {

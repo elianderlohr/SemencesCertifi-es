@@ -11,15 +11,6 @@ const pool = mysql.createPool({
   password: process.env.MYSQL_PASSWORD,
 });
 
-const getDatabase = () => {
-  if (process.env.NODE_ENV === "production") {
-    return "ict4d";
-  } else {
-    return "ict4d_dev";
-  }
-};
-
 module.exports = {
   pool,
-  getDatabase,
 };

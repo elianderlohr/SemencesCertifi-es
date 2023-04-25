@@ -3,7 +3,41 @@ How to use the API.
 
 ## Setup
 
-### 1. .env
+### 1. Download and Install XAMPP
+
+Download and install XAMPP from [https://www.apachefriends.org/download.html](https://www.apachefriends.org/download.html).
+
+### 2. Start XAMPP
+
+Start XAMPP and start the Apache and MySQL services.
+
+### 3.1. Create Database
+
+Import the database from [`assets/database/ict4d.sql`](../assets/database/ict4d.sql) into MySQL.
+
+### 3.2 Create User
+
+Create a database user which can read, write and drop tables in the database. The user should have the following credentials:
+
+```bash
+username: development
+password: test
+```
+
+### 4. Install Node.js
+
+Download and install Node.js from [https://nodejs.org/en/download/](https://nodejs.org/en/download/).
+
+### 5. Install Dependencies
+
+Install the dependencies using the following command:
+
+```bash
+cd api
+npm install
+```
+
+### 6. Create .env File
 
 Create a .env file in the root directory of the project. The .env file should contain the following variables:
 
@@ -17,13 +51,15 @@ MYSQL_USER = 'development'
 MYSQL_PASSWORD = 'test'
 ```
 
-### 2. Start API
+### 7. Start API
 
 Start api using the following command:
 
 ```
 npm run start
 ```
+
+The API is now running on [http://localhost:3000](http://localhost:3000).
 
 ## Usage
 

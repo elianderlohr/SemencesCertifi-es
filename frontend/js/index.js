@@ -5,7 +5,7 @@ const _handleSignedIn = () => {
     $.ajax({
         url: `${
           domain.includes("localhost")
-            ? "https://dev.semencescertifiees.elch.cc/"
+            ? "http://localhost:3000"
             : "https://api.semencescertifiees.elch.cc/"
         }laboratory/signedin`,
         type: "GET",
@@ -35,7 +35,7 @@ const _login = () => {
     $.ajax({
         url: `${
             domain.includes("localhost")
-                ? "https://dev.semencescertifiees.elch.cc/"
+                ? "http://localhost:3000"
                 : "https://api.semencescertifiees.elch.cc/"
         }laboratory/login`,
         type: "POST",
