@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === "production") {
   // CORS
   const cors = require("cors");
 
-  app.use(cors({ credentials: true, origin: /https?:\/\/(\w+\.)?elch\.cc/ }));
+  app.use(cors({ credentials: true, origin: "https://semenceescertifiees.elch.cc" }));
 
   app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Credentials", true);
