@@ -32,14 +32,11 @@ if (process.env.NODE_ENV === "production") {
       name: "SemencesCertifieesEssential",
       secret: process.env.JWT_SECRET,
       resave: false,
-      saveUninitialized: false,
-      store: new MemoryStore(),
-      /**cookie: {
+      saveUninitialized: true
+      cookie: {
         secure: true,
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        sameSite: "strict",
-        domain: "PLACEHOLDER",
-      },**/
+      },
     })
   );
 
@@ -72,16 +69,11 @@ if (process.env.NODE_ENV === "production") {
       name: "SemencesCertifieesEssential",
       secret: process.env.JWT_SECRET,
       resave: false,
-      saveUninitialized: false,
-      store: new MemoryStore(),
-      /** 
+      saveUninitialized: true
       cookie: {
         secure: false,
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        sameSite: "none",
-        httpOnly: true,
-        domain: "PLACEHOLDER",
-      },*/
+      },
     })
   );
 
