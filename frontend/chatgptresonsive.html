@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .image {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url("img/background-green.jpg");
+        height: 50vh; /* set the height to 50% of the viewport height */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+      }
+
+      .logo {
+        float: left;
+        margin-right: 20px;
+      }
+
+      .text {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+      }
+
+      .button-container {
+        display: flex;
+        flex-wrap: wrap; /* add a wrap property to allow the buttons to wrap onto multiple lines on small screens */
+        justify-content: center; /* center the buttons horizontally */
+        align-items: center; /* center the buttons vertically */
+        margin-top: 20px;
+      }
+
+      .button {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 20px 40px;
+        color: black;
+        background-color: #ddd;
+        text-align: center;
+        cursor: pointer;
+        font-size: 24px; /* reduce the font size for small screens */
+        margin: 10px; /* add some margin between the buttons */
+        flex-basis: 250px; /* set a fixed width for the buttons */
+      }
+
+      .button2 {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+      }
+
+      /* adjust the size and margin of the images depending on the screen size */
+      .button-container img:first-child {
+        width: 250px;
+        height: auto;
+        margin: 10px;
+      }
+
+      .button-container img:last-child {
+        width: 75px;
+        height: auto;
+        margin: 10px;
+        cursor: pointer;
+      }
+
+      @media screen and (min-width: 768px) { /* apply the following styles only on screens wider than 768px */
+        .image {
+          height: 70vh; /* increase the height of the image on larger screens */
+        }
+
+        .button {
+          font-size: 36px; /* increase the font size for larger screens */
+          flex-basis: auto; /* allow the buttons to take up more space on larger screens */
+          margin: 20px; /* increase the margin between the buttons on larger screens */
+        }
+
+        /* adjust the size and margin of the images for larger screens */
+        .button-container img:first-child {
+          width: 400px;
+          height: auto;
+          margin: 20px;
+        }
+
+        .button-container img:last-child {
+          width: 100px;
+          height: auto;
+          margin: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="image">
+      <div class="text">
+        <h1 style="font-size: 50px">Welcome to SemencesCertifiées</h1>
+        <p>Bienvenue à SemencesCertifiées</p>
+        </div>
+        </div>
+        
+        <div class="button-container">
+            <img src="img/Logo.png" alt="Logo" />
+            <a href="login">
+              <button class="button">Press to See Certification</button>
+            </a>
+            <a href="certificates/index.html">
+              <img src="img/certification-icon.png" alt="Certification Icon" />
+            </a>
+          </div>
+          
+          <div class="button2">
+            <a href="sign-in.html">
+              <button>Log In</button>
+            </a>
+          </div>
+        </body>
+        </html>                  
