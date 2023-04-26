@@ -101,6 +101,9 @@ if (process.env.NODE_ENV === "production") {
 // index
 app.use("/", require("./routes/index"));
 
+// test
+app.use("/test", require("./routes/test"));
+
 // ROUTING - FARMER
 app.use("/farmer/", require("./routes/farmer"));
 
