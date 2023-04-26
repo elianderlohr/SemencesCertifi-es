@@ -5,7 +5,7 @@ const _handleSignedIn = () => {
     $.ajax({
         url: `${
           domain.includes("localhost")
-            ? "http://localhost:3000"
+            ? "http://localhost:3000/"
             : "https://api.semencescertifiees.elch.cc/"
         }laboratory/signedin`,
         type: "GET",
@@ -16,9 +16,9 @@ const _handleSignedIn = () => {
 
             if (xhr.status === 200) {
                 if (user.loggedIn)
-                    alert("You are signed in");
+                    document.getElementById("test").innerHTML = "You are signed in";
                 else
-                    alert("You are not signed in");
+                    document.getElementById("test").innerHTML = "You are not signed in";
             } else {
                 alert("Error");
             }
@@ -35,7 +35,7 @@ const _login = () => {
     $.ajax({
         url: `${
             domain.includes("localhost")
-                ? "http://localhost:3000"
+                ? "http://localhost:3000/"
                 : "https://api.semencescertifiees.elch.cc/"
         }laboratory/login`,
         type: "POST",
