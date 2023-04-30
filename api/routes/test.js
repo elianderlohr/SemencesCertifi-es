@@ -14,7 +14,7 @@ router.get("/info", async (req, res) => {
   // create object
   const info = {
     "@": {
-      xmlns: "https://www.w3.org/2002/vxml-conformance",
+      xmlns: "http://www.w3.org/2001/vxml",
     },
     info: {
       name: "ICT4D",
