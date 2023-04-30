@@ -13,9 +13,14 @@ const js2xmlparser = require("js2xmlparser");
 router.get("/info", async (req, res) => {
   // create object
   const info = {
-    name: "ICT4D",
-    version: "1.0.0",
-    description: "ICT4D API",
+    "@": {
+      xmlns: "https://www.w3.org/2002/vxml-conformance",
+    },
+    info: {
+      name: "ICT4D",
+      version: "1.0.0",
+      description: "ICT4D API",
+    },
   };
 
   // return object as xml
