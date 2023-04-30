@@ -10,7 +10,22 @@ const js2xmlparser = require("js2xmlparser");
 // *********************************************
 
 // Set up a route to authenticate a user and generate a JWT token
-router.get("/info", async (req, res) => {
+router.get("/withoutEncoding", async (req, res) => {
+  // create object
+  const info = {
+    name: "ICT4D",
+    version: "1.0.0",
+    description: "ICT4D API",
+  };
+
+  // return object as xml
+  res.set("Content-Type", "text/xml");
+  res.send(
+    js2xmlparser.parse("info", info)
+  );
+});
+// Set up a route to authenticate a user and generate a JWT token
+router.get("/withEncoding", async (req, res) => {
   // create object
   const info = {
     name: "ICT4D",
@@ -26,7 +41,7 @@ router.get("/info", async (req, res) => {
 });
 
 // Set up a route to authenticate a user and generate a JWT token
-router.get("/test", async (req, res) => {
+router.get("/withNamespace", async (req, res) => {
   // create object
   const info = {
     "@": {
