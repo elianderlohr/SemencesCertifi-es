@@ -54,6 +54,19 @@ router.get("/docuExample", async (req, res) => {
   `);
 });
 
+router.get("/docuExampleApplicationHeader", async (req, res) => {
+  res.set("Content-Type", "application/xml");
+  res.send(`<?xml version="1.0"?>
+  <?access-control allow="*"?>
+  <quote>
+    <ticker>F</ticker>
+    <name>Ford Motor Company</name>
+    <change>1.00</change>
+    <last>30.00</last>
+  </quote>
+  `);
+});
+
 // Set up a route to authenticate a user and generate a JWT token
 router.get("/withNamespace", async (req, res) => {
   // create object
