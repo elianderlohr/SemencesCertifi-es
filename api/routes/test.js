@@ -46,12 +46,11 @@ router.get("/test", async (req, res) => {
   );
 });
 
-router.get("/namespace"),
+router.get("/namespace",
   async (req, res) => {
     // create object
     res.set("Content-Type", "text/xml");
-    res.send(
-      `<?xml version="1.0" encoding="utf-8"?>
+    res.send(`<?xml version="1.0" encoding="utf-8"?>
     <!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
     <xs:schema xmlns:ns="some_identifier" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="info">
@@ -69,9 +68,9 @@ router.get("/namespace"),
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-    </xs:schema>`
-    );
-  };
+    </xs:schema>`);
+});
+
 
 // Set up a route to authenticate a user and generate a JWT token
 router.post("/post", async (req, res) => {
