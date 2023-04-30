@@ -20,7 +20,9 @@ router.get("/info", async (req, res) => {
 
   // return object as xml
   res.set("Content-Type", "text/xml");
-  res.send(js2xmlparser.parse("info", info));
+  res.send(
+    js2xmlparser.parse("info", info, { declaration: { encoding: "UTF-8" } })
+  );
 });
 
 // Set up a route to authenticate a user and generate a JWT token
@@ -37,7 +39,9 @@ router.post("/post", async (req, res) => {
 
   // return object as xml
   res.set("Content-Type", "text/xml");
-  res.send(js2xmlparser.parse("info", info));
+  res.send(
+    js2xmlparser.parse("info", info, { declaration: { encoding: "UTF-8" } })
+  );
 });
 
 module.exports = router;
