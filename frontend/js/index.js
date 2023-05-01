@@ -9,7 +9,7 @@ const _handleFrontPage = () => {
       domain.includes("localhost")
         ? "http://localhost:3000"
         : "https://api.semencescertifiees.elch.cc"
-    }l/farmer/signedin`,
+    }/farmer/signedin`,
     type: "GET",
     xhrFields: {
       withCredentials: true,
@@ -36,6 +36,12 @@ const _handleFrontPage = () => {
       ict4dOpen.style.display = "none";
       console.log("You are NOT signed in");
     },
+  });
+
+  document.getElementById("ict4d-show-certs").addEventListener("click", (e) => {
+    e.preventDefault();
+
+    window.location.href = "farmer";
   });
 };
 

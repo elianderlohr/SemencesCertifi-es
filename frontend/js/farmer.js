@@ -77,4 +77,28 @@ const _handleCertificates = () => {
     });
 };
 
+const _handlePage = () => {
+  var domain = window.location.hostname;
+
+  $.ajax({
+    url: `${
+      domain.includes("localhost")
+        ? "http://localhost:3000"
+        : "https://api.semencescertifiees.elch.cc"
+    }/farmer/signedin`,
+    type: "GET",
+    xhrFields: {
+      withCredentials: true,
+    },
+    success: function (user, textStatus, xhr) {
+      if (xhr.status === 200) {
+        if (user.loggedIn) {
+          document.getElementById("ict4d-phone").innerHTML = user.phone;
+        } 
+      }
+    },
+  });
+};
+
 _handleCertificates();
+_handlePage();
