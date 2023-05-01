@@ -67,7 +67,7 @@ const _handleCertificate = (id) => {
       success: function (certificate, textStatus, xhr) {
         if (xhr.status === 200) {
           alert("Certificate updated");
-          window.location.href = "/lab/certificate/view/id=" + id;
+          window.location.href = "/lab/certificates/show/?id=" + id;
         } else {
           alert("Login failed");
           window.location.href = "/lab";

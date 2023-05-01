@@ -96,7 +96,7 @@ const _updateCertificate = () => {
       console.log(xhr);
       if (xhr.status === 200) {
         alert("Certificate added");
-        window.location.href = "/lab/certificate/view/id=" + certificate.id;
+        window.location.href = "/lab/certificates/show/?id=" + certificate.id;
       } else {
         console.log(xhr);
         alert(xhr.responseText);
