@@ -25,7 +25,7 @@ const _handleCertificates = () => {
                       <td>${certificate.species}</td>
                       <td>${certificate.campaign}</td>
                       <td>${certificate.creation_date}</td>
-                      <td><a href="show?id=${certificate.id}">VIEW</a> - <a href="#">EDIT</a> - <a href="update?id=${certificate.id}" onclick="_deleteCertificate(${certificate.id})">DELETE</a></td>
+                      <td><a href="show?id=${certificate.id}">VIEW</a> - <a href="update?id=${certificate.id}">EDIT</a> - <a href="#" onclick="_deleteCertificate(${certificate.id})">DELETE</a></td>
                   </tr>`;
           table.innerHTML += row;
         });
@@ -39,7 +39,6 @@ const _handleCertificates = () => {
       window.location.href = "/lab";
     },
   });
-
 
   document.getElementById("ict4d-add-new").addEventListener("click", () => {
     window.location.href = "certificates/new";
