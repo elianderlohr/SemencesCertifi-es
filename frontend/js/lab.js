@@ -43,35 +43,6 @@ const _handleFrontPage = () => {
         e.preventDefault();
         window.location.href = "certificates";
     });
-
-    document.getElementById("ict4d-lab-logout").addEventListener("click", () => {
-      var domain = window.location.hostname;
-  
-      $.ajax({
-        url: `${
-          domain.includes("localhost")
-            ? "http://localhost:3000"
-            : "https://api.semencescertifiees.elch.cc"
-        }/laboratory/logout`,
-        type: "POST",
-        xhrFields: {
-          withCredentials: true,
-        },
-        success: function (data, textStatus, xhr) {
-          console.log(xhr);
-          if (xhr.status === 200) {
-            window.location.href = "/lab/";
-          } else {
-            console.log(xhr);
-            alert(xhr.responseText);
-          }
-        },
-        error: function (xhr, textStatus, errorThrown) {
-          console.log(xhr);
-          alert(xhr.responseText);
-        },
-      });
-    });
 }
 
 const _handleLogin = () => {
