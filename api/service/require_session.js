@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 
 async function requireFarmerSession(req, res, next) {
   if (!req.session.token) {
-    res.send("No active session");
+    res.status(400).send("No active session");
   } else {
     // check if token is still active and valid
     jwt.verify(
@@ -16,12 +16,12 @@ async function requireFarmerSession(req, res, next) {
       process.env.JWT_SECRET,
       async function (err, decoded) {
         if (err) {
-          res.send("Session expired");
+          res.status(400).send("Session expired");
         } else {
           const role = decoded.role;
 
           if (role !== "farmer") {
-            res.send("Wrong role");
+            res.status(400).send("Wrong role");
           }
 
           // token is valid

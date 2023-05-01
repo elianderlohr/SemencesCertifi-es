@@ -248,7 +248,7 @@ router.get("/:id", async (req, res) => {
     } else if (decoded.role === "farmer") {
         // check if certificate exists and belongs to farmer
         database.pool.query(
-            "SELECT f.phone, c.* FROM ict4d.t_certificate c, ict4d.t_user_farmer f WHERE c.farmer_id = f.id AND c.d = ? AND c.farmer_id = ?;",   
+            "SELECT f.phone, c.* FROM ict4d.t_certificate c, ict4d.t_user_farmer f WHERE c.farmer_id = f.id AND c.id = ? AND c.farmer_id = ?;",   
             [id, userId],
             async (error, certificate) => {
                 if (error) {
