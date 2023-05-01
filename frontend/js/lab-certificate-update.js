@@ -29,12 +29,12 @@ const _handleCertificate = (id) => {
           document.getElementById("input-purity").value = certificate.purity;
         } else {
           alert("Login failed");
-          window.location.href = "/";
+          window.location.href = "/lab";
         }
       },
       error: function (xhr, textStatus, errorThrown) {
         alert("Login failed");
-        window.location.href = "/";
+        window.location.href = "/lab";
       },
     });
   };
@@ -107,7 +107,7 @@ const _handleCertificate = (id) => {
           success: function (data, textStatus, xhr) {
             console.log(xhr);
             if (xhr.status === 200) {
-              window.location.href = "/lab/";
+              window.location.href = "/lab";
             } else {
               console.log(xhr);
               alert(xhr.responseText);

@@ -41,7 +41,7 @@ const _handleCertificates = () => {
   });
 
   document.getElementById("ict4d-add-new").addEventListener("click", () => {
-    window.location.href = "certificates/new";
+    window.location.href = "new";
   });
 
   document.getElementById("ict4d-lab-logout").addEventListener("click", () => {
