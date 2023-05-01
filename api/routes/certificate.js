@@ -37,12 +37,25 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
     return res.status(401).send("Error: Wrong role");
   }
 
+  // ensure phone number is valid, only numbers and + allowed
+  if (!phone.match(/^[0-9+]+$/)) {
+    return res.status(400).send("Error: Invalid phone number");
+  }
+
   const laboratory_id = decoded.userId;
 
   // check if phone and pin are set
   if (!phone || !pin) {
     return res.status(400).send("Error: Phone or pin not set");
   }
+
+  // ensure no empty fields
+  if (!species) return res.status(400).send("Error: Species not set");
+  if (!campaign) return res.status(400).send("Error: Campaign not set");
+  if (!germination) return res.status(400).send("Error: Germination not set");
+  if (!variety) return res.status(400).send("Error: Variety not set");
+  if (!batch_number) return res.status(400).send("Error: Batch number not set");
+  if (!purity) return res.status(400).send("Error: Purity not set");
 
   // check if user exists
   database.pool.query(
@@ -218,7 +231,7 @@ router.get("/:id", async (req, res) => {
     if (decoded.role === "laboratory") {
         // check if certificate exists and belongs to laboratory
         database.pool.query(
-            "SELECT * FROM ict4d.t_certificate WHERE `id` = ? AND `laboratory_id` = ?;",   
+            "SELECT f.phone, c.* FROM ict4d.t_certificate c, ict4d.t_user_farmer f WHERE c.farmer_id = f.id AND c.id = ? AND c.laboratory_id = ?;",   
             [id, userId],
             async (error, certificate) => {
                 if (error) {
@@ -235,7 +248,7 @@ router.get("/:id", async (req, res) => {
     } else if (decoded.role === "farmer") {
         // check if certificate exists and belongs to farmer
         database.pool.query(
-            "SELECT * FROM ict4d.t_certificate WHERE `id` = ? AND `farmer_id` = ?;",   
+            "SELECT f.phone, c.* FROM ict4d.t_certificate c, ict4d.t_user_farmer f WHERE c.farmer_id = f.id AND c.d = ? AND c.farmer_id = ?;",   
             [id, userId],
             async (error, certificate) => {
                 if (error) {
