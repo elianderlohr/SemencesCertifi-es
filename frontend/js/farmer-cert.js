@@ -36,13 +36,13 @@ const _handleCertificate = (id) => {
             navigator.clipboard.writeText(url);
         });
       } else {
-        alert("Login failed");
-        window.location.href = "";
+        alert(xhr.responseText);
+        window.location.href = "/farmer";
       }
     },
     error: function (xhr, textStatus, errorThrown) {
-      alert("Login failed");
-      window.location.href = "";
+      alert(xhr.responseText);
+      window.location.href = "/farmer";
     },
   });
 };
@@ -68,7 +68,7 @@ const _setup = () => {
         },
         success: function (data, textStatus, xhr) {
           if (xhr.status === 200) {
-            window.location.href = "";
+            window.location.href = "/";
           } else {
             alert("Logout failed");
           }
