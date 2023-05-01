@@ -17,7 +17,11 @@ var router = express.Router();
 
 // Set up a route to authenticate a user and generate a JWT token
 router.post("/login", async (req, res) => {
-  const { phone, pin } = req.body;
+  
+  // parse phone from body as string
+  const phone = req.body.phone.toString();
+  // parse pin from body as 
+  const pin = req.body.pin.toString();
 
   // check if phone and pin are set
   if (!phone || !pin) {
@@ -90,7 +94,7 @@ router.get("/signedin", async (req, res) => {
           return res.json({ loggedIn: false });
         }
 
-        return res.json({ loggedIn: true, userId: userId });
+        return res.json({ loggedIn: true, userId: userId, role: "farmer", phone: user[0].phone });
       }
     );
   } catch (err) {

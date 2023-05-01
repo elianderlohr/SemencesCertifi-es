@@ -17,3 +17,9 @@ Folder: [`frontend`](frontend)
 The REST API is written in Node.JS and uses the Express framework. The API is used to retrieve and update data from a MySQL database. 
 
 Folder: [`api`](api)
+
+## VoiceXML
+
+The VoiceXML application is written in VoiceXML and uses the REST API to retrieve and update data. 
+
+Folder: [`voicexml`](voicexml)

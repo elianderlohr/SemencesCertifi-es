@@ -90,7 +90,7 @@ router.get("/signedin", async (req, res) => {
           return res.json({ loggedIn: false });
         }
 
-        return res.json({ loggedIn: true, userId: userId, role: "laboratory" });
+        return res.json({ loggedIn: true, userId: userId, role: "laboratory", username: user[0].username });
       });
   } catch (err) {
     return res.json({ loggedIn: false });
