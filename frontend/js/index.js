@@ -1,63 +1,83 @@
-const _handleSignedIn = () => {
+const _handleFrontPage = () => {
+  const ict4dLogin = document.getElementById("ict4d-login");
+  const ict4dOpen = document.getElementById("ict4d-open");
 
-    var domain = window.location.hostname;
+  var domain = window.location.hostname;
 
-    $.ajax({
-        url: `${
-          domain.includes("localhost")
-            ? "http://localhost:3000/"
-            : "https://api.semencescertifiees.elch.cc/"
-        }laboratory/signedin`,
-        type: "GET",
-        xhrFields: {
-          withCredentials: true,
-        },
-        success: function (user, textStatus, xhr) {
-
-            if (xhr.status === 200) {
-                if (user.loggedIn)
-                    document.getElementById("test").innerHTML = "You are signed in";
-                else
-                    document.getElementById("test").innerHTML = "You are not signed in";
-            } else {
-                alert("Error");
-            }
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            alert(errorThrown);
-        },
-    });
+  $.ajax({
+    url: `${
+      domain.includes("localhost")
+        ? "http://localhost:3000"
+        : "https://api.semencescertifiees.elch.cc"
+    }l/farmer/signedin`,
+    type: "GET",
+    xhrFields: {
+      withCredentials: true,
+    },
+    success: function (user, textStatus, xhr) {
+      if (xhr.status === 200) {
+        if (user.loggedIn) {
+          ict4dLogin.style.display = "none";
+          ict4dOpen.style.display = "block";
+          console.log("You are signed in");
+        } else {
+          ict4dLogin.style.display = "block";
+          ict4dOpen.style.display = "none";
+          console.log("You are NOT signed in");
+        }
+      } else {
+        ict4dLogin.style.display = "block";
+        ict4dOpen.style.display = "none";
+        console.log("You are NOT signed in");
+      }
+    },
+    error: function (xhr, textStatus, errorThrown) {
+      ict4dLogin.style.display = "block";
+      ict4dOpen.style.display = "none";
+      console.log("You are NOT signed in");
+    },
+  });
 };
 
-const _login = () => {
-    var domain = window.location.hostname;
+const _handleLogin = () => {
+    const form = document.getElementById("ict4d-login-form");
 
-    $.ajax({
-        url: `${
-            domain.includes("localhost")
-                ? "http://localhost:3000/"
-                : "https://api.semencescertifiees.elch.cc/"
-        }laboratory/login`,
-        type: "POST",
-        xhrFields: {
-            withCredentials: true,
-        },
-        data: {
-            username: "lb1",
-            password: "test",
-        },
-        success: function (user, textStatus, xhr) {
-            if (xhr.status === 200) {
-                _handleSignedIn();
-            } else {
-                alert("Error");
-            }
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            alert(errorThrown);
-        },
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const phone = document.getElementById("phone").value;
+        const pin = document.getElementById("pin").value;
+
+        var domain = window.location.hostname;
+
+        $.ajax({
+            url: `${
+                domain.includes("localhost")
+                    ? "http://localhost:3000"
+                    : "https://api.semencescertifiees.elch.cc"
+            }/farmer/login`,
+            type: "POST",
+            data: {
+                phone: phone.toString(),
+                pin: pin.toString(),
+            },
+            xhrFields: {
+                withCredentials: true,
+            },
+            success: function (user, textStatus, xhr) {
+                if (xhr.status === 200) {
+                    window.location.href = "farmer";
+                } else {
+                    alert("Login failed");
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert("Login failed");
+            },
+        });
     });
 };
 
 // run the function on page load
-_login();
+_handleFrontPage();
+_handleLogin();

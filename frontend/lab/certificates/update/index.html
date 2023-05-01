@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Certificate | SemencesCertifiées</title>
+    <link rel="stylesheet" href="../../../css/cert.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <ul>
+                    <li><a id="ict4d-lab-logout" href="#">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="centered">
+                <h2>Update Existing Certificate</h2>
+                <br>
+                <div class="certificates">
+                    <ul>
+                      <li><strong>Phone:</strong> <input type="text" id="input-phone"></li>
+                      <li><strong>Pin:</strong> <input type="text" id="input-pin"></li>
+                      <li><strong>Species:</strong> <input type="text" id="input-species"></li>
+                      <li><strong>Campaign:</strong> <input type="text" id="input-campaign"></li>
+                      <li><strong>Germination:</strong> <input type="text" id="input-germination"></li>
+                      <li><strong>Variety:</strong> <input type="text" id="input-variety"></li>
+                      <li><strong>Batch Number:</strong> <input type="text" id="input-batch"></li>
+                      <li><strong>Purity:</strong> <input type="text" id="input-purity"></li>
+                    </ul>
+                  </div>
+                  <div id="ict4d-open" class="centered">
+                    <button id="ict4d-update" type="button">SAVE CHANGES</button>
+                  </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="../../../js/lab-certificate-update.js"></script>
+</body>
+
+</html>

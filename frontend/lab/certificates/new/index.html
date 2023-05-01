@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Certificate | SemencesCertifiées</title>
+    <link rel="stylesheet" href="../../../css/cert.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <ul>
+                    <li><a id="ict4d-lab-logout" href="#">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="centered">
+                <h2>Add New Certificate</h2>
+                <br>
+                <div class="certificates">
+                    <ul>
+                      <li><strong>Phone:</strong> <input type="text" id="input-phone" placeholder="89123123"></li>
+                      <li><strong>Pin (max 4 digits):</strong> <input type="text" id="input-pin" placeholder="1234"></li>
+                      <li><strong>Species:</strong> <input type="text" id="input-species" placeholder="Millet"></li>
+                      <li><strong>Campaign:</strong> <input type="text" id="input-campaign" placeholder="2019-2020"></li>
+                      <li><strong>Germination:</strong> <input type="number" id="input-germination" placeholder="0.98"></li>
+                      <li><strong>Variety:</strong> <input type="text" id="input-variety" placeholder="Tooniou C1"></li>
+                      <li><strong>Batch Number:</strong> <input type="number" id="input-batch" placeholder="32"></li>
+                      <li><strong>Purity:</strong> <input type="number" id="input-purity" placeholder="0.996"></li>
+                    </ul>
+                  </div>
+                  <div id="ict4d-open" class="centered">
+                    <button id="ict4d-add-new" type="button">ADD NEW CERTIFICATE</button>
+                  </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="../../../js/lab-certificate-new.js"></script>
+</body>
+
+</html>
