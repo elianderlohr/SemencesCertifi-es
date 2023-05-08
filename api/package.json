@@ -18,6 +18,7 @@
     "express": "~4.16.1",
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
+    "express-xml-bodyparser": "^0.3.0",
     "find-config": "^1.0.0",
     "find-module": "^0.2.1",
     "http-errors": "~1.6.3",

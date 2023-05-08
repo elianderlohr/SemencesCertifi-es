@@ -23,7 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-
 if (process.env.NODE_ENV === "production") {
   app.set("trust proxy", 1);
 
@@ -112,6 +111,9 @@ app.use("/laboratory/", require("./routes/laboratory"));
 
 // ROUTING - CERTIFICATE
 app.use("/certificate/", require("./routes/certificate"));
+
+// ROUTING - VOICEXML
+app.use("/voicexml/", require("./routes/voicexml"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
