@@ -112,12 +112,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}laboratory/certificates",
+							"raw": "{{url}}laboratory/certificates?search=123213",
 							"host": [
 								"{{url}}laboratory"
 							],
 							"path": [
 								"certificates"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "123213"
+								}
 							]
 						}
 					},
@@ -373,7 +379,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "<Data>\r\n    <Apikey>{{api_key}}</Apikey>\r\n    <Phone>08127333912321</Phone>\r\n</Data>",
+							"raw": "<Data>\r\n    <Apikey>{{api_key}}</Apikey>\r\n    <Phone>081273912321</Phone>\r\n</Data>",
 							"options": {
 								"raw": {
 									"language": "xml"
@@ -399,7 +405,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "<Data>\r\n    <Apikey>{{api_key}}</Apikey>\r\n    <Phone>08127333912321</Phone>\r\n    <Page>1</Page>\r\n</Data>",
+							"raw": "<Data>\r\n    <Apikey>{{api_key}}</Apikey>\r\n    <Phone>081273912321</Phone>\r\n    <Page>1</Page>\r\n</Data>",
 							"options": {
 								"raw": {
 									"language": "xml"
@@ -425,7 +431,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "<Data>\r\n    <Apikey>{{api_key}}</Apikey>\r\n    <Phone>08127333912321</Phone>\r\n    <Certificateid>8</Certificateid>\r\n</Data>",
+							"raw": "<Data>\r\n    <Apikey>{{api_key}}</Apikey>\r\n    <Phone>081273912321</Phone>\r\n    <CertificateId>1</CertificateId>\r\n</Data>",
 							"options": {
 								"raw": {
 									"language": "xml"
