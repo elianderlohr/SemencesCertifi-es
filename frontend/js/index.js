@@ -89,8 +89,6 @@ const _handleLanguage = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const lan = urlParams.get("lan");
 
-  console.log(lan);
-
   if (lan === "fr") {
     document.getElementById("lan-phone").innerHTML = "Téléphone";
     document.getElementById("lan-pin").innerHTML = "PIN";
@@ -98,6 +96,8 @@ const _handleLanguage = () => {
     document.getElementById("lan-show-certs").innerHTML = "Voir les certificats";
     document.getElementById("lan-impressum").innerHTML = "Impressum";
     document.getElementById("lan-lab-login").innerHTML = "Connexion laboratoire";	
+    document.getElementById("lan-fr").innerHTML = "Français";
+    document.getElementById("lan-en").innerHTML = "English";
   } else {
     document.getElementById("lan-phone").innerHTML = "Phone";
     document.getElementById("lan-pin").innerHTML = "PIN";
@@ -105,6 +105,8 @@ const _handleLanguage = () => {
     document.getElementById("lan-show-certs").innerHTML = "Show certificates";
     document.getElementById("lan-impressum").innerHTML = "Impressum";
     document.getElementById("lan-lab-login").innerHTML = "Laboratory login";
+    document.getElementById("lan-fr").innerHTML = "Français";
+    document.getElementById("lan-en").innerHTML = "English";
   }
 };
 
