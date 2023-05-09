@@ -38,8 +38,7 @@ router.post("/login", async (req, res) => {
         return res.status(401).send("Error: User does not exist");
       }
 
-      if (user[0].password !== password)
-      {
+      if (user[0].password !== password) {
         return res.status(401).send("Error: Wrong password");
       }
 
@@ -90,8 +89,14 @@ router.get("/signedin", async (req, res) => {
           return res.json({ loggedIn: false });
         }
 
-        return res.json({ loggedIn: true, userId: userId, role: "laboratory", username: user[0].username });
-      });
+        return res.json({
+          loggedIn: true,
+          userId: userId,
+          role: "laboratory",
+          username: user[0].username,
+        });
+      }
+    );
   } catch (err) {
     return res.json({ loggedIn: false });
   }
@@ -111,26 +116,23 @@ router.post("/logout", requirements.requireLaboratorySession, (req, res) => {
 });
 
 // Set up a route to get the user info
-router.post(
-  "/account",
-  async (req, res) => {
-    // get user id from token
-    const decoded = jwt.verify(req.session.token, process.env.JWT_SECRET);
-    const userId = decoded.userId;
+router.post("/account", async (req, res) => {
+  // get user id from token
+  const decoded = jwt.verify(req.session.token, process.env.JWT_SECRET);
+  const userId = decoded.userId;
 
-    // get user from database syncronously
-    database.pool.query(
-      "SELECT `id`, `username`, `signup_date`, (SELECT COUNT(*) FROM ict4d.t_certificate c WHERE c.laboratory_id = l.id) AS certificates FROM ict4d.t_user_laboratory l WHERE l.id = ?;",
-      [userId],
-      async (error, user) => {
-        if (error) {
-          return res.status(500).send("Error: Server error");
-        }
-        return res.send(user[0]);
+  // get user from database syncronously
+  database.pool.query(
+    "SELECT `id`, `username`, `signup_date`, (SELECT COUNT(*) FROM ict4d.t_certificate c WHERE c.laboratory_id = l.id) AS certificates FROM ict4d.t_user_laboratory l WHERE l.id = ?;",
+    [userId],
+    async (error, user) => {
+      if (error) {
+        return res.status(500).send("Error: Server error");
       }
-    );
-  }
-);
+      return res.send(user[0]);
+    }
+  );
+});
 
 // *********************************************
 // *                                           *
@@ -140,26 +142,44 @@ router.post(
 
 // Set up a route to get the user certificates
 router.get(
-  "/certificates", requirements.requireLaboratorySession,
+  "/certificates",
+  requirements.requireLaboratorySession,
   async (req, res) => {
     // get user id from token
     const decoded = jwt.verify(req.session.token, process.env.JWT_SECRET);
     const userId = decoded.userId;
 
-    // get certificates from database
-    database.pool.query(
-      "SELECT c.*, f.phone FROM ict4d.t_certificate c, ict4d.t_user_farmer f WHERE c.farmer_id = f.id AND c.laboratory_id = ?;",
-      [userId],
-      async (error, certificate) => {
-        if (error) {
-          return res.status(500).send("Error: Server error");
-        }
+    // search
+    const search = req.query.search;
 
-        return res.status(200).send(certificate);
-      }
-    );
+    if (search === "") {
+      // get certificates from database
+      database.pool.query(
+        "SELECT c.*, f.phone FROM ict4d.t_certificate c, ict4d.t_user_farmer f WHERE c.farmer_id = f.id AND c.laboratory_id = ?;",
+        [userId],
+        async (error, certificate) => {
+          if (error) {
+            return res.status(500).send("Error: Server error");
+          }
+
+          return res.status(200).send(certificate);
+        }
+      );
+    } else {
+      // get certificates from database
+      database.pool.query(
+        "SELECT c.*, f.phone FROM ict4d.t_certificate c, ict4d.t_user_farmer f WHERE c.farmer_id = f.id AND c.laboratory_id = ? AND f.phone LIKE ?;",
+        [userId, "%" + search + "%"],
+        async (error, certificate) => {
+          if (error) {
+            return res.status(500).send("Error: Server error");
+          }
+
+          return res.status(200).send(certificate);
+        }
+      );
+    }
   }
 );
-
 
 module.exports = router;

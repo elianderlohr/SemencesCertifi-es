@@ -1,4 +1,4 @@
-const _handleCertificates = () => {
+const _handleCertificates = (search) => {
   // get certificates from ajax endpoint
 
   var domain = window.location.hostname;
@@ -12,6 +12,9 @@ const _handleCertificates = () => {
     type: "GET",
     xhrFields: {
       withCredentials: true,
+    },
+    data: {
+      search: search,
     },
     success: function (certificates, textStatus, xhr) {
       if (xhr.status === 200) {
@@ -126,7 +129,12 @@ const _handlePage = () => {
       }
     },
   });
+
+  // get "search" param from current url
+  const urlParams = new URLSearchParams(window.location.search);
+  const search = urlParams.get("search");
+
+  _handleCertificates(search);
 };
 
-_handleCertificates();
 _handlePage();
