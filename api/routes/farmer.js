@@ -94,7 +94,7 @@ router.get("/signedin", async (req, res) => {
           return res.json({ loggedIn: false });
         }
 
-        return res.json({ loggedIn: true, userId: userId, role: "farmer", phone: user[0].phone });
+        return res.json({ loggedIn: true, userId: userId, role: "farmer", phone: user[0].phone, language: user[0].language });
       }
     );
   } catch (err) {

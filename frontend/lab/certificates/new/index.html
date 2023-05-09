@@ -23,19 +23,35 @@
                 <br>
                 <div class="certificates">
                     <ul>
-                      <li><strong>Phone:</strong> <input type="text" id="input-phone" placeholder="89123123"></li>
-                      <li><strong>Pin (max 4 digits):</strong> <input type="text" id="input-pin" placeholder="1234"></li>
-                      <li><strong>Species:</strong> <input type="text" id="input-species" placeholder="Millet"></li>
-                      <li><strong>Campaign:</strong> <input type="text" id="input-campaign" placeholder="2019-2020"></li>
-                      <li><strong>Germination:</strong> <input type="number" id="input-germination" placeholder="0.98"></li>
-                      <li><strong>Variety:</strong> <input type="text" id="input-variety" placeholder="Tooniou C1"></li>
-                      <li><strong>Batch Number:</strong> <input type="number" id="input-batch" placeholder="32"></li>
-                      <li><strong>Purity:</strong> <input type="number" id="input-purity" placeholder="0.996"></li>
+                        <label>User Data:</label>
+                        <li><strong>Phone:</strong> <input type="text" id="input-phone" placeholder="89123123"></li>
+                        <li><strong>Pin (max 4 digits):</strong> <input type="text" id="input-pin" placeholder="1234">
+                        </li>
+                        <li><strong>Language (only french or english):</strong> <select id="input-language">
+                                <option value="fr">French</option>
+                                <option value="en">English</option>
+                            </select>
+                            </select></li>
+                        <br>
+                        <label>Certificate Data:</label>
+                        <li><strong>Species:</strong> <input type="text" id="input-species" placeholder="Millet"></li>
+                        <li><strong>Campaign:</strong> <input type="text" id="input-campaign" placeholder="2019-2020">
+                        </li>
+                        <li><strong>Germination:</strong> <input type="number" id="input-germination"
+                                placeholder="0.98"></li>
+                        <li><strong>Variety:</strong> <input type="text" id="input-variety" placeholder="Tooniou C1">
+                        </li>
+                        <li><strong>Batch Number:</strong> <input type="number" id="input-batch" placeholder="32"></li>
+                        <li><strong>Purity:</strong> <input type="number" id="input-purity" placeholder="0.996"></li>
+                        
+                        <br>
+                        <li><strong>Accepted:</strong> <span id="ict4d-accepted"></span></li>
+                        <span>Certificates with a purity above 98% are accepted!</span>
                     </ul>
-                  </div>
-                  <div id="ict4d-open" class="centered">
+                </div>
+                <div id="ict4d-open" class="centered">
                     <button id="ict4d-add-new" type="button">ADD NEW CERTIFICATE</button>
-                  </div>
+                </div>
             </div>
         </main>
     </div>

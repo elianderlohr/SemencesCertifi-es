@@ -15,7 +15,7 @@ var router = express.Router();
 // *                                           *
 // *********************************************
 
-// PARAM: `farmer_id`, `laboratory_id`, `species`, `campaign`, `germination`, `variety`, `batch_number`, `purity`
+// PARAM: `farmer_id`, `laboratory_id`, `species`, `campaign`, `germination`, `variety`, `batch_number`, `purity`, `language`
 
 // Set up a route and add a certificate
 router.post("/", requirements.requireLaboratorySession, async (req, res) => {
@@ -28,6 +28,7 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
     variety,
     batch_number,
     purity,
+    language,
   } = req.body;
 
   const token = req.session.token;
@@ -57,6 +58,10 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
   if (!batch_number) return res.status(400).send("Error: Batch number not set");
   if (!purity) return res.status(400).send("Error: Purity not set");
 
+  if (language !== "en" && language !== "fr") {
+    return res.status(400).send("Error: Language not supported or set");
+  }
+
   // check if user exists
   database.pool.query(
     "SELECT * FROM ict4d.t_user_farmer WHERE phone = ?;",
@@ -78,9 +83,16 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
               return res.status(500).send("Error: Server error");
             }
 
+            // if purity below 98% do not accept
+            let accepted = 0;
+            if (purity > 0.98) {
+              accepted = 1;
+            }
+
+
             // Create certificate
             database.pool.query(
-              "INSERT INTO ict4d.t_certificate (`farmer_id`, `view_id`, `laboratory_id`, `species`, `campaign`, `germination`, `variety`, `batch_number`, `purity`) VALUES (?, FLOOR(RAND() * 90000) + 10000, ?, ?, ?, ?, ?, ?, ?);",
+              "INSERT INTO ict4d.t_certificate (`farmer_id`, `view_id`, `laboratory_id`, `species`, `campaign`, `germination`, `variety`, `batch_number`, `purity`, `accepted`) VALUES (?, FLOOR(RAND() * 90000) + 10000, ?, ?, ?, ?, ?, ?, ?, ?);",
               [
                 newUser.insertId,
                 laboratory_id,
@@ -90,6 +102,7 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
                 variety,
                 batch_number,
                 purity,
+                accepted
               ],
               async (error, certificate) => {
                 if (error) {
@@ -104,16 +117,22 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
       } else {
         // Update pin
         database.pool.query(
-          "UPDATE ict4d.t_user_farmer SET pin = ? WHERE phone = ?;",
-          [pin, phone],
+          "UPDATE ict4d.t_user_farmer SET pin = ?, language = ? WHERE phone = ?;",
+          [pin, language, phone],
           async (error, _) => {
             if (error) {
               return res.status(500).send("Error: Server error");
             }
 
+            // if purity below 98% do not accept
+            let accepted = 0;
+            if (purity > 0.98) {
+              accepted = 1;
+            }
+
             // Create certificate
             database.pool.query(
-              "INSERT INTO ict4d.t_certificate (`farmer_id`, `view_id`, `laboratory_id`, `species`, `campaign`, `germination`, `variety`, `batch_number`, `purity`) VALUES (?, FLOOR(RAND() * 90000) + 10000, ?, ?, ?, ?, ?, ?, ?);",
+              "INSERT INTO ict4d.t_certificate (`farmer_id`, `view_id`, `laboratory_id`, `species`, `campaign`, `germination`, `variety`, `batch_number`, `purity`, `accepted`) VALUES (?, FLOOR(RAND() * 90000) + 10000, ?, ?, ?, ?, ?, ?, ?, ?);",
               [
                 user[0].id,
                 laboratory_id,
@@ -123,6 +142,7 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
                 variety,
                 batch_number,
                 purity,
+                accepted
               ],
               async (error, certificate) => {
                 if (error) {
@@ -152,6 +172,7 @@ router.post(
       variety,
       batch_number,
       purity,
+      language,
     } = req.body;
 
     const token = req.session.token;
@@ -163,9 +184,15 @@ router.post(
 
     const laboratory_id = decoded.userId;
 
+    // if purity below 98% do not accept
+    let accepted = 0;
+    if (purity > 0.98) {
+      accepted = 1;
+    }
+
     // update certificate
     database.pool.query(
-      "UPDATE ict4d.t_certificate SET `species` = ?, `campaign` = ?, `germination` = ?, `variety` = ?, `batch_number` = ?, `purity` = ? WHERE `id` = ? AND `laboratory_id` = ?;",
+      "UPDATE ict4d.t_certificate SET `species` = ?, `campaign` = ?, `germination` = ?, `variety` = ?, `batch_number` = ?, `purity` = ?, `accepted` = ? WHERE `id` = ? AND `laboratory_id` = ?;",
       [
         species,
         campaign,
@@ -173,6 +200,7 @@ router.post(
         variety,
         batch_number,
         purity,
+        accepted,
         id,
         laboratory_id,
       ],

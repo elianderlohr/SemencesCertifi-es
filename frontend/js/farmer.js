@@ -26,12 +26,20 @@ const _handleCertificates = () => {
           table.innerHTML += row;
         } else {
           certificates.forEach((certificate) => {
+
+            let accepted = certificate.accepted;
+            if (certificate.accepted === 1)
+              accepted = "Accepted";
+            else if (certificate.accepted === 0)
+              accepted = "Rejected";
+              
             // const create row
             const row = `
                 <tr>
                     <td>${certificate.species}</td>
                     <td>${certificate.campaign}</td>
                     <td>${certificate.creation_date}</td>
+                    <td>${accepted}</td>
                     <td><a href="cert?id=${certificate.id}">OPEN</a></td>
                 </tr>`;
             table.innerHTML += row;

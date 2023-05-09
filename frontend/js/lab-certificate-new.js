@@ -59,6 +59,13 @@ const _updateCertificate = () => {
     return;
   }
 
+  // ensure language is en or fr
+  if (document.getElementById("input-language").value !== "en" && document.getElementById("input-language").value !== "fr")
+  {
+    alert("Language must be en or fr");
+    return;
+  }
+
   // ensure document.getElementById("input-germination").value and document.getElementById("input-purity").value are using decimal .
   if (document.getElementById("input-germination").value.includes(","))
   {
@@ -91,6 +98,7 @@ const _updateCertificate = () => {
       variety: document.getElementById("input-variety").value,
       batch_number: parseInt(document.getElementById("input-batch").value),
       purity: parseFloat(document.getElementById("input-purity").value),
+      language: document.getElementById("input-language").value,
     },
     success: function (certificate, textStatus, xhr) {
       console.log(xhr);
@@ -140,6 +148,27 @@ const _setup = () => {
     });
   });
 
+  // create input-purity on text change event
+  document.getElementById("input-purity").addEventListener("input", () => {
+    if (document.getElementById("input-purity").value !== "")
+    {
+      var purityParsed = parseFloat(document.getElementById("input-purity").value);
+
+      if (purityParsed > 0.98)
+      {
+        document.getElementById("ict4d-accepted").value = "Accepted";
+      }
+      else
+      {
+        document.getElementById("ict4d-accepted").value = "Rejected";
+      }
+
+    }
+    else
+    {
+      document.getElementById("ict4d-accepted").value = "";
+    }
+  });
 
   document.getElementById("ict4d-add-new").addEventListener("click", () => {
     _updateCertificate();

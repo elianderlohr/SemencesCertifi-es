@@ -59,10 +59,12 @@ router.post(
                 Code: 200,
                 Message: "User exists",
               },
-              body: {
-                farmer: {
-                  id: user[0].id,
-                },
+            };
+
+            result.Body = {
+              Farmer: {
+                Id: user[0].id,
+                Language: user[0].language,
               },
             };
 
@@ -146,7 +148,7 @@ router.post(
           } else {
             // get certificates
             database.pool.query(
-              "SELECT * FROM ict4d.t_certificate c, ict4d.t_user_farmer f WHERE c.farmer_id = f.id AND f.phone = ? LIMIT ? OFFSET ?;",
+              "SELECT c.* FROM ict4d.t_certificate c, ict4d.t_user_farmer f WHERE c.farmer_id = f.id AND f.phone = ? LIMIT ? OFFSET ?;",
               [phone, perPage, offset],
               async (error, certificates) => {
                 if (error) {
@@ -204,11 +206,11 @@ router.post(
                           Code: 200,
                           Message: "Certificates found",
                         },
-                        body: {
-                          certificates: {
-                            count: count[0].count,
-                            certificate: certificates,
-                          },
+                      };
+                      result.Body = {
+                        Certificates: {
+                          Count: count[0].count,
+                          Certificate: certificates,
                         },
                       };
 
@@ -330,9 +332,9 @@ router.post(
                       Code: 200,
                       Message: "Certificate found",
                     },
-                    body: {
-                      certificate: certificate[0],
-                    },
+                  };
+                  result.Body = {
+                    certificate: certificate[0],
                   };
 
                   res.status(200).send(
