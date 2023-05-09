@@ -17,11 +17,11 @@
       <br>
       <div id="ict4d-login" class="centered">
         <form id="ict4d-login-form">
-          <label for="phone">Phone Number:</label>
+          <label id="lan-phone" for="phone">Phone Number:</label>
           <input type="tel" id="phone" name="phone" value="081273912321" required><br>
-          <label for="pin">Pin Code:</label>
+          <label id="lan-pin" for="pin">Pin Code:</label>
           <input type="password" id="pin" name="pin" minlength="4" maxlength="4" value="1231" required><br>
-          <button type="submit">Login</button>
+          <button id="lan-login" type="submit">Login</button>
         </form>
       </div>
       <div id="ict4d-open" class="centered">
@@ -31,8 +31,10 @@
     <footer>
       <nav>
         <ul>
-          <li><a href="/impressum">Impressum</a></li>
-          <li><a href="/lab">Laboratory's Login</a></li>
+          <li><a id="lan-impressum" href="/impressum">Impressum</a></li>
+          <li><a id="lan-lab-login" href="/lab">Laboratory's Login</a></li>
+          <li><a href="?lan=fr">French<a></li>
+          <li><a href="?lan=en">English<a></li>
         </ul>
       </nav>
       <p>&copy; 2023 SemencesCertifiées. All rights reserved.</p>

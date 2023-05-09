@@ -84,6 +84,29 @@ const _handleLogin = () => {
     });
 };
 
+const _handleLanguage = () => {
+  // get language from url "lan"
+  const urlParams = new URLSearchParams(window.location.search);
+  const lan = urlParams.get("lan");
+
+  if (lan === "fr") {
+    document.getElementById("lan-phone").innerHTML = "Téléphone";
+    document.getElementById("lan-pin").innerHTML = "PIN";
+    document.getElementById("lan-login").innerHTML = "Connexion";
+    document.getElementById("lan-show-certs").innerHTML = "Voir les certificats";
+    document.getElementById("lan-impressum").innerHTML = "Impressum";
+    document.getElementById("lan-lab-login").innerHTML = "Connexion laboratoire";	
+  } else {
+    document.getElementById("lan-phone").innerHTML = "Phone";
+    document.getElementById("lan-pin").innerHTML = "PIN";
+    document.getElementById("lan-login").innerHTML = "Login";
+    document.getElementById("lan-show-certs").innerHTML = "Show certificates";
+    document.getElementById("lan-impressum").innerHTML = "Impressum";
+    document.getElementById("lan-lab-login").innerHTML = "Laboratory login";
+  }
+};
+
 // run the function on page load
 _handleFrontPage();
 _handleLogin();
+_handleLanguage();
