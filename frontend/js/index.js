@@ -89,6 +89,8 @@ const _handleLanguage = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const lan = urlParams.get("lan");
 
+  console.log(lan);
+
   if (lan === "fr") {
     document.getElementById("lan-phone").innerHTML = "Téléphone";
     document.getElementById("lan-pin").innerHTML = "PIN";
