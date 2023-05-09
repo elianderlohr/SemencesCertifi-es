@@ -150,6 +150,7 @@ const _setup = () => {
 
   // create input-purity on text change event
   document.getElementById("input-purity").addEventListener("input", () => {
+    console.log("input-purity changed");
     if (document.getElementById("input-purity").value !== "")
     {
       var purityParsed = parseFloat(document.getElementById("input-purity").value);

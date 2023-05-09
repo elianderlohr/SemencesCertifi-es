@@ -28,6 +28,9 @@ const _handleCertificate = (id) => {
             certificate.variety;
           document.getElementById("ict4d-batch").innerHTML = certificate.batch;
           document.getElementById("ict4d-purity").innerHTML = certificate.purity;
+
+          document.getElementById("ict4d-accepted").innerHTML = certificate.accepted === 1 ? "Accepted" : "Rejected";
+          
         } else {
           alert("Login failed");
           window.location.href = "/";

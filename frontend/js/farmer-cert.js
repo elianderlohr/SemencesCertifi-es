@@ -29,7 +29,7 @@ const _handleCertificate = (id) => {
         document.getElementById("ict4d-batch").innerHTML = certificate.batch;
         document.getElementById("ict4d-purity").innerHTML = certificate.purity;
 
-        document.getElementById("ict4d-accepted").innerHTML = certificate.accepted === 1 ? "Yes" : "No";
+        document.getElementById("ict4d-accepted").innerHTML = certificate.accepted === 1 ? "Accepted" : "Rejected";
 
         document.getElementById("ict4d-link").innerHTML = "https://semencescertifiees.elch.cc/view/?id=" + certificate.view_id;
         document.getElementById("ict4d-link").addEventListener("click", () => {
