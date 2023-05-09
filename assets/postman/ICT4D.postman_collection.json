@@ -246,7 +246,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"phone\": \"081273912321\",\r\n    \"pin\": 1231,\r\n    \"species\": \"Millet\",\r\n    \"campaign\": \"2019-2020\",\r\n    \"germination\": 0.98,\r\n    \"variety\": \"Tooniou C1\",\r\n    \"batch_number\": 31,\r\n    \"purity\": 0.996\r\n}",
+							"raw": "{\r\n    \"phone\": \"08127333912321\",\r\n    \"pin\": 1231,\r\n    \"species\": \"Millet\",\r\n    \"campaign\": \"2019-2020\",\r\n    \"germination\": \"0.22\",\r\n    \"variety\": \"Tooniou C1\",\r\n    \"batch_number\": 31,\r\n    \"purity\": 0.996\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -364,6 +364,89 @@
 			]
 		},
 		{
+			"name": "voicexml",
+			"item": [
+				{
+					"name": "account exists",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<Data>\r\n    <Apikey>{{api_key}}</Apikey>\r\n    <Phone>08127333912321</Phone>\r\n</Data>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}voicexml/user-exists.xml",
+							"host": [
+								"{{url}}voicexml"
+							],
+							"path": [
+								"user-exists.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get certificates",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<Data>\r\n    <Apikey>{{api_key}}</Apikey>\r\n    <Phone>08127333912321</Phone>\r\n    <Page>1</Page>\r\n</Data>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}voicexml/certificates.xml",
+							"host": [
+								"{{url}}voicexml"
+							],
+							"path": [
+								"certificates.xml"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get certificate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<Data>\r\n    <Apikey>{{api_key}}</Apikey>\r\n    <Phone>08127333912321</Phone>\r\n    <Certificateid>8</Certificateid>\r\n</Data>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}voicexml/certificate.xml",
+							"host": [
+								"{{url}}voicexml"
+							],
+							"path": [
+								"certificate.xml"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Healthcheck",
 			"request": {
 				"method": "GET",
@@ -401,7 +484,12 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "https://api-semencescertifiees.elch.cc/",
+			"value": "https://api.semencescertifiees.elch.cc/",
+			"type": "default"
+		},
+		{
+			"key": "api_key",
+			"value": "a13c2c03-f82f-4d39-935f-228a638988a7",
 			"type": "default"
 		}
 	]
