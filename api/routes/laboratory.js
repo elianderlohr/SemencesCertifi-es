@@ -148,7 +148,7 @@ router.get(
 
     // get certificates from database
     database.pool.query(
-      "SELECT * FROM ict4d.t_certificate WHERE `laboratory_id` = ?;",
+      "SELECT c.*, f.phone FROM ict4d.t_certificate c, ict4d.t_user_farmer f WHERE c.farmer_id = f.id AND c.laboratory_id = ?;",
       [userId],
       async (error, certificate) => {
         if (error) {

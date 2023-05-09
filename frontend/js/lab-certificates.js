@@ -22,6 +22,7 @@ const _handleCertificates = () => {
           // const create row
           const row = `
                   <tr>
+                      <td>${certificate.phone}</td>
                       <td>${certificate.species}</td>
                       <td>${certificate.campaign}</td>
                       <td>${certificate.creation_date}</td>
