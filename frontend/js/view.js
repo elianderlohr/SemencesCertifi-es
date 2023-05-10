@@ -34,6 +34,8 @@ const _handleCertificate = (id) => {
 
         document.getElementById("ict4d-accepted").innerHTML =
           certificate.accepted === 1 ? "Accepted" : "Rejected";
+        document.getElementById("ict4d-accepted").style.color =
+          certificate.accepted === 1 ? "green" : "red";
       } else {
         alert("Login failed");
         window.location.href = "";
