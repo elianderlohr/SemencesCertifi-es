@@ -156,12 +156,12 @@ const _setup = () => {
 
       if (purityParsed > 0.98)
       {
-        document.getElementById("ict4d-accepted").innerHTML = "ACCEPTED";
+        document.getElementById("ict4d-accepted").innerHTML = "ACCEPTED/ACCEPTÉ";
         document.getElementById("ict4d-accepted").style.color = "green";
       }
       else
       {
-        document.getElementById("ict4d-accepted").innerHTML = "REJECTED";
+        document.getElementById("ict4d-accepted").innerHTML = "REJECTED/REJETÉ";
         document.getElementById("ict4d-accepted").style.color = "red";
       }
 

@@ -31,7 +31,7 @@ const _handleCertificate = (id) => {
 
         document.getElementById("ict4d-date").innerHTML = certificate.creation_date;
 
-        document.getElementById("ict4d-accepted").innerHTML = certificate.accepted === 1 ? "Accepted" : "Rejected";
+        document.getElementById("ict4d-accepted").innerHTML = certificate.accepted === 1 ? "ACCEPTED/ACCEPTÉ" : "REJECTED/REJETÉ";
         document.getElementById("ict4d-accepted").style.color = certificate.accepted === 1 ? "green" : "red";
 
         document.getElementById("ict4d-link").innerHTML = "https://semencescertifiees.elch.cc/view/?id=" + certificate.view_id;
