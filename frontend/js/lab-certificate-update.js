@@ -25,7 +25,7 @@ const _handleCertificate = (id) => {
             certificate.germination;
           document.getElementById("input-variety").value =
             certificate.variety;
-          document.getElementById("input-batch").value = certificate.batch;
+          document.getElementById("input-batch").value = certificate.batch_number;
           document.getElementById("input-purity").value = certificate.purity;
         } else {
           alert("Login failed");

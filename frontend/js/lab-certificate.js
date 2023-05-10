@@ -26,7 +26,7 @@ const _handleCertificate = (id) => {
             certificate.germination;
           document.getElementById("ict4d-variety").innerHTML =
             certificate.variety;
-          document.getElementById("ict4d-batch").innerHTML = certificate.batch;
+          document.getElementById("ict4d-batch").innerHTML = certificate.batch_number;
           document.getElementById("ict4d-purity").innerHTML = certificate.purity;
 
           document.getElementById("ict4d-accepted").innerHTML = certificate.accepted === 1 ? "ACCEPTED/ACCEPTÉ" : "REJECTED/REJETÉ";
