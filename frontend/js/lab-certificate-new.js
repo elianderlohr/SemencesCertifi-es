@@ -150,18 +150,19 @@ const _setup = () => {
 
   // create input-purity on text change event
   document.getElementById("input-purity").addEventListener("input", () => {
-    console.log("input-purity changed");
     if (document.getElementById("input-purity").value !== "")
     {
       var purityParsed = parseFloat(document.getElementById("input-purity").value);
 
       if (purityParsed > 0.98)
       {
-        document.getElementById("ict4d-accepted").value = "Accepted";
+        document.getElementById("ict4d-accepted").innerHTML = "ACCEPTED";
+        document.getElementById("ict4d-accepted").style.color = "green";
       }
       else
       {
-        document.getElementById("ict4d-accepted").value = "Rejected";
+        document.getElementById("ict4d-accepted").innerHTML = "REJECTED";
+        document.getElementById("ict4d-accepted").style.color = "red";
       }
 
     }
