@@ -19,18 +19,18 @@
     </header>
     <main>
         <div class="centered">
-            <h2>Certification Overview</h2>
+            <h2 id="ict4d-lan-overview">Certification Overview</h2>
             <br>
-            <p>Logged in as: <strong id="ict4d-phone"></strong></p>
+            <p><span id="ict4d-lan-loggedin">Logged in as:</span> <strong id="ict4d-phone"></strong></p>
             <br>
             <table>
                 <thead>
                     <tr>
-                        <th>Species</th>
-                        <th>Campaign</th>
-                        <th>Accepted</th>
-                        <th>Creation Date</th>
-                        <th>Action</th>
+                        <th id="ict4d-lan-species">Species</th>
+                        <th id="ict4d-lan-campaign">Campaign</th>
+                        <th id="ict4d-lan-accepted">Accepted</th>
+                        <th id="ict4d-lan-date">Creation Date</th>
+                        <th id="ict4d-lan-action">Action</th>
                     </tr>
                 </thead>
                 <tbody id="ict4d-table">
@@ -38,10 +38,20 @@
             </table>
         </div>
     </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a id="lan-impressum" href="/impressum">Impressum</a></li>
+                <li><a id="lan-fr" href="?lan=fr">Français<a></li>
+                <li><a id="lan-en" href="?lan=en">English<a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2023 SemencesCertifiées. All rights reserved.</p>
+    </footer>
     </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="../js/farmer.js?id=s"></script>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="../js/farmer.js?id=s"></script>
 </body>
 
 </html>

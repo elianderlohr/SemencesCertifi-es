@@ -20,6 +20,10 @@ const _handleFrontPage = () => {
           ict4dLogin.style.display = "none";
           ict4dOpen.style.display = "block";
           console.log("You are signed in");
+
+          const language = user.language;
+
+          _handleLanguage(language);
         } else {
           ict4dLogin.style.display = "block";
           ict4dOpen.style.display = "none";
@@ -84,10 +88,13 @@ const _handleLogin = () => {
     });
 };
 
-const _handleLanguage = () => {
+const _handleLanguage = (lan) => {
   // get language from url "lan"
-  const urlParams = new URLSearchParams(window.location.search);
-  const lan = urlParams.get("lan");
+  if (lan === "") {
+    // get language from url "lan"
+    const urlParams = new URLSearchParams(window.location.search);
+    lan = urlParams.get("lan");
+  }
 
   if (lan === "fr") {
     document.getElementById("lan-phone").innerHTML = "Téléphone";
@@ -113,4 +120,4 @@ const _handleLanguage = () => {
 // run the function on page load
 _handleFrontPage();
 _handleLogin();
-_handleLanguage();
+_handleLanguage("");

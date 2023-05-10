@@ -108,5 +108,74 @@ const _handlePage = () => {
   });
 };
 
+const _handleFrontPage = () => {
+  var domain = window.location.hostname;
+
+  $.ajax({
+    url: `${
+      domain.includes("localhost")
+        ? "http://localhost:3000"
+        : "https://api.semencescertifiees.elch.cc"
+    }/farmer/signedin`,
+    type: "GET",
+    xhrFields: {
+      withCredentials: true,
+    },
+    success: function (user, textStatus, xhr) {
+      if (xhr.status === 200) {
+        if (user.loggedIn) {
+          console.log("You are signed in");
+
+          const language = user.language;
+
+          _handleLanguage(language);
+        } else {
+          console.log("You are NOT signed in");
+          _handleLanguage("");
+        }
+      } else {
+        console.log("You are NOT signed in");
+        _handleLanguage("");
+      }
+    },
+    error: function (xhr, textStatus, errorThrown) {
+      console.log("You are NOT signed in");
+      _handleLanguage("");
+    },
+  });
+};
+
+const _handleLanguage = (lan) => {
+
+  if (lan === "") {
+    // get language from url "lan"
+    const urlParams = new URLSearchParams(window.location.search);
+    lan = urlParams.get("lan");
+  }
+
+  if (lan === "fr") {
+    document.getElementById("ict4d-farmer-logout").innerHTML = "Déconnexion";
+    document.getElementById("ict4d-lan-overview").innerHTML = "Aperçu de la certification";
+
+    document.getElementById("ict4d-lan-loggedin").innerHTML = "Connecté en tant que:";
+
+    document.getElementById("ict4d-lan-species").innerHTML = "Espèce";
+    document.getElementById("ict4d-lan-campaign").innerHTML = "Campagne";
+    document.getElementById("ict4d-lan-date").innerHTML = "Date de création";
+    document.getElementById("ict4d-lan-action").innerHTML = "Action";
+  } else {
+    document.getElementById("ict4d-farmer-logout").innerHTML = "Logout";
+    document.getElementById("ict4d-lan-overview").innerHTML = "Certification overview";
+
+    document.getElementById("ict4d-lan-loggedin").innerHTML = "Logged in as:";
+
+    document.getElementById("ict4d-lan-species").innerHTML = "Species";
+    document.getElementById("ict4d-lan-campaign").innerHTML = "Campaign";
+    document.getElementById("ict4d-lan-date").innerHTML = "Creation date";
+    document.getElementById("ict4d-lan-action").innerHTML = "Action";
+  }
+};
+
 _handleCertificates();
 _handlePage();
+_handleFrontPage();
