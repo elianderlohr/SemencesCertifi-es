@@ -60,6 +60,8 @@ const _handleLanguage = (lan) => {
     document.getElementById("ict4d-lan-purity").innerHTML = "Pureté:";
     document.getElementById("ict4d-lan-date").innerHTML = "Date de création:";
     document.getElementById("ict4d-lan-accepted").innerHTML = "Aacceptée:";
+
+    document.getElementById("ict4d-lan-lan").innerHTML = "Langue:";
     document.getElementById("ict4d-french").innerHTML = "Français";
     document.getElementById("ict4d-english").innerHTML = "English";
   } else {
@@ -76,6 +78,7 @@ const _handleLanguage = (lan) => {
     document.getElementById("ict4d-lan-date").innerHTML = "Creation date:";
     document.getElementById("ict4d-lan-accepted").innerHTML = "Accepted:";
 
+    document.getElementById("ict4d-lan-lan").innerHTML = "Language:";
     document.getElementById("ict4d-french").innerHTML = "French";
     document.getElementById("ict4d-english").innerHTML = "Anglais";
   }
