@@ -28,6 +28,8 @@ const _handleCertificate = (id) => {
             certificate.variety;
           document.getElementById("ict4d-batch").innerHTML = certificate.batch;
           document.getElementById("ict4d-purity").innerHTML = certificate.purity;
+
+          document.getElementById("ict4d-date").innerHTML = certificate.creation_date;
         } else {
           alert("Login failed");
           window.location.href = "";
@@ -40,10 +42,55 @@ const _handleCertificate = (id) => {
     });
   };
   
+  const _handleLanguage = (lan) => {
+  
+    if (lan === "fr") {
+      document.getElementById("ict4d-lan-overview").innerHTML = "Aperçu de la certification";
+  
+      document.getElementById("ict4d-lan-id").innerHTML = "Identité publique:";
+      document.getElementById("ict4d-lan-species").innerHTML = "Espèce:";
+      document.getElementById("ict4d-lan-campaign").innerHTML = "Campagne:";
+      document.getElementById("ict4d-lan-germ").innerHTML = "Germination:";
+      document.getElementById("ict4d-lan-variety").innerHTML = "Variété:";
+      document.getElementById("ict4d-lan-batch").innerHTML = "Lot:";
+      document.getElementById("ict4d-lan-purity").innerHTML = "Pureté:";
+      document.getElementById("ict4d-lan-date").innerHTML = "Date de création:";
+      document.getElementById("ict4d-lan-accepted").innerHTML = "Aacceptée:";
+      document.getElementById("ict4d-french").innerHTML = "Français";
+      document.getElementById("ict4d-english").innerHTML = "English";
+
+    } else {
+      document.getElementById("ict4d-lan-overview").innerHTML = "Certification overview";
+  
+      document.getElementById("ict4d-lan-id").innerHTML = "Public ID:";
+      document.getElementById("ict4d-lan-species").innerHTML = "Species:";
+      document.getElementById("ict4d-lan-campaign").innerHTML = "Campaign:";
+      document.getElementById("ict4d-lan-germ").innerHTML = "Germination:";
+      document.getElementById("ict4d-lan-variety").innerHTML = "Variety:";
+      document.getElementById("ict4d-lan-batch").innerHTML = "Batch:";
+      document.getElementById("ict4d-lan-purity").innerHTML = "Purity:";
+      document.getElementById("ict4d-lan-date").innerHTML = "Creation date:";
+      document.getElementById("ict4d-lan-accepted").innerHTML = "Accepted:";
+
+      document.getElementById("ict4d-french").innerHTML = "French";
+      document.getElementById("ict4d-english").innerHTML = "Anglais";
+  
+    }
+  };
+  
+
   const _setup = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get('id');
   
+      document.getElementById("ict4d-english").addEventListener("click", () => {
+        _handleLanguage("en");
+      });
+
+      document.getElementById("ict4d-french").addEventListener("click", () => {
+        _handleLanguage("fr");
+      });
+
       _handleCertificate(id);
   };
   

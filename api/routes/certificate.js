@@ -76,8 +76,8 @@ router.post("/", requirements.requireLaboratorySession, async (req, res) => {
         console.log("User does not exist");
         // Create new user
         database.pool.query(
-          "INSERT INTO ict4d.t_user_farmer (phone, pin) VALUES (?, ?);",
-          [phone, pin],
+          "INSERT INTO ict4d.t_user_farmer (phone, pin, language) VALUES (?, ?, ?);",
+          [phone, pin, language],
           async (error, newUser) => {
             if (error) {
               return res.status(500).send("Error: Server error");
