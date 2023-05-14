@@ -71,3 +71,5 @@ The API can be accessed using the following endpoints:
 The API is documented using Postman. The documentation file can be found under [`assets\postman\ICT4D.postman_collection.json`](assets\postman\ICT4D.postman_collection.json).
 
 Import the file into Postman to view the documentation.
+
+A in depth documentation of the API can be found on: https://github.com/elianderlohr/SemencesCertifiees/wiki
