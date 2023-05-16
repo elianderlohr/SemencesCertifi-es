@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2023 at 12:36 PM
+-- Generation Time: May 16, 2023 at 04:24 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -61,18 +61,6 @@ INSERT INTO `t_certificate` (`id`, `view_id`, `farmer_id`, `laboratory_id`, `spe
 (14, '77488', 6, 1, 'Millet', '2019-2020', '0.0000', 'Tooniou C1', 31, '0.9960', '', 0, '2023-05-01 12:45:17'),
 (15, '32210', 6, 1, 'Millet', '2019-2020', '0.2200', 'Tooniou C1', 31, '0.9960', '', 0, '2023-05-01 12:45:29'),
 (16, '38153', 5, 1, 'asd', 'sad', '0.5500', 'adas', 55, '0.5500', '', 0, '2023-05-01 12:52:36');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `t_faq`
---
-
-CREATE TABLE `t_faq` (
-  `id` int(11) NOT NULL,
-  `question` text NOT NULL,
-  `answer` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
