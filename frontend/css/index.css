@@ -101,6 +101,8 @@ body {
 
 main {
   flex: 1;
+  overflow-y: auto; /* Added scrollable overflow */
+  padding-bottom: 50px; /* Added padding to prevent content from being blocked by the footer */
 }
 
 footer {
