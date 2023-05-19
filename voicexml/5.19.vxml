@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE vxml 
+     PUBLIC "-//W3C//DTD VOICEXML 2.1//EN" 
+     "http://www.w3.org/TR/voicexml21/vxml.dtd">
+<vxml version = "2.1" xmlns="http://www.w3.org/2001/vxml">
+
+<!-- Author: Zheng Zhang & Michelle Schifferstein
+     ICT4D group 9
+     
+     Interactive voice application for retrieving information on seed certificate applications.
+     Comes with a web application for viewing and downloading certificates.
+
+     Version 1.0 (M. Schifferstein - 20-24/04/2023) - phone number recognition with redirect, menus for FAQ's, viewing certificates, getting info on process. All endpoints lead back to the previous menu. All menus have a return option. All data is hardcoded.
+	 Version 2.0 (Z. Zhang - 01-19/05/2023) - API plugin, phone number check & certificats list & certificats detial interaction with backend 
+      -->
+
+    <!-- Check whether phone number is registered. Redirect user to the appropriate menu. -->
+
+    <form id="phone_check">
+		<var name="phone" expr="session.telephone.ani"/>
+		<var name="apikey" expr="a13c2c03-f82f-4d39-935f-228a638988a7"/>
+				
+		<block>
+			<submit method="post" next="https://api.semencescertifiees.elch.cc/voicexml/user-exists.xml" namelist="apikey phone" enctype="application/x-www-form-urlencoded" />
+		</block>
+		
+		<script><![CDATA[
+		  var code = serverResponse.documentElement.getElementsByTagName("Code").item(0).firstChild.data;
+		  var userLanguage = serverResponse.documentElement.getElementsByTagName("Language").item(0).firstChild.data;
+		]]></script>
+		
+		<block>
+			<if cond="code == '200'">
+			  <if cond="userLanguage == 'en'">
+				<prompt>Welcome to the English menu.</prompt>
+				<goto next="#en_farmer_select"/>
+
+			  <elseif cond="userLanguage == 'fr'"/>
+				<prompt>Bienvenue dans le menu français.</prompt>
+				<goto next="#fr_farmer_select"/>
+
+			  <else/>
+				<prompt>Invalid language attribute.</prompt>
+			  </if>
+			
+			<elseif cond="code == '500'"/>
+			  <prompt>Server Error: There is a problem with the server.</prompt>
+
+			<elseif cond="code == '401'"/>
+			  <prompt>Unauthorized: The API key is invalid.</prompt>
+
+			<elseif cond="code == '400'"/>
+			  <prompt>User does not exist.</prompt>
+			  <goto next="#languageform"/>
+
+			</if>
+		</block>
+			
+    </form>
+	
+	<form id="certificates">
+		<var name="phone" expr="session.telephone.ani"/>
+		<var name="apikey" expr="a13c2c03-f82f-4d39-935f-228a638988a7"/>
+				
+		<block>
+			<submit method="post" next="https://api.semencescertifiees.elch.cc/voicexml/user-exists.xml" namelist="apikey phone" enctype="application/x-www-form-urlencoded" />
+		</block>
+		
+		<script><![CDATA[
+		  var code = serverResponse.documentElement.getElementsByTagName("Code").item(0).firstChild.data;
+		  var count = serverResponse.documentElement.getElementsByTagName("Count").item(0).firstChild.data;
+		  var firstId = serverResponse.documentElement.getElementsByTagName("id").item(0).firstChild.data;
+		]]></script>
+		<block>
+			<if cond="code == '200'">
+				<prompt>
+					<s>Here are <value expr="count"/> Certificates found.</s>
+					<s>The id of first Certificate is <value expr="firstId"/>.</s>
+				</prompt>
+			
+			
+			<elseif cond="code == '500'"/>
+			  <prompt>Server Error: There is a problem with the server.</prompt>
+
+			<elseif cond="code == '401'"/>
+			  <prompt>Unauthorized: The API key is invalid.</prompt>
+
+			</if>
+		</block>
+    </form>
+	
+
+	
+    <form id="certificate">
+		<var name="phone" expr="session.telephone.ani"/>
+		<var name="apikey" expr="a13c2c03-f82f-4d39-935f-228a638988a7"/>
+		
+		<field name="cid" type="digits">
+			<prompt>Please enter the certificate id that required to query</prompt>
+		</field>
+		
+		<filled>
+			<assign name="certificateid" expr="cid" />
+		</filled>
+				
+		<block>
+			<submit method="post" next="https://api.semencescertifiees.elch.cc/voicexml/user-exists.xml" namelist="apikey phone certificateid" enctype="application/x-www-form-urlencoded" />
+		</block>
+		
+		<script><![CDATA[
+		  var code = serverResponse.documentElement.getElementsByTagName("Code").item(0).firstChild.data;
+		  var farmer_id = serverResponse.documentElement.getElementsByTagName("farmer_id").item(0).firstChild.data;
+		  var issued_at = serverResponse.documentElement.getElementsByTagName("issued_at").item(0).firstChild.data;
+		  var expires_at = serverResponse.documentElement.getElementsByTagName("expires_at").item(0).firstChild.data;
+		]]></script>
+		
+		<block>
+			<if cond="code == '200'">
+				<prompt>
+					<s>Certificate found.</s>
+					<s>The famer id is <value expr="farmer_id"/>.</s>
+					<s>The issued date is <value expr="issued_at"/>.</s>
+					<s>The expires date is <value expr="expires_at"/>.</s>
+				</prompt>
+			
+			
+			<elseif cond="code == '500'"/>
+			  <prompt>Server Error: There is a problem with the server.</prompt>
+			<elseif cond="code == '401'"/>
+			  <prompt>Unauthorized: The API key is invalid.</prompt>
+
+			</if>
+		</block>
+		
+    </form>
+	
+
+	
+	<menu id="languageform" dtmf="true">
+		<prompt>
+		<s>For English, press 1.</s>
+		<s xml:lang="fr">Pour le français, appuyez sur 2.</s>
+		</prompt>
+		
+		<choice next="#en_unregistered_select"/>
+		<choice next="#fr_unregistered_select"/>
+	</menu>
+	
+
+    <!-- English menu for unregistered users. Contains return, application process information and FAQ options. -->
+    <menu id="en_unregistered_select" dtmf="true">
+        <prompt>
+            <s>Welcome. Your phone number is not registered with us yet.</s>
+            <s>Please choose one of the following options.</s>
+            <s>To return to the previous menu, press 1.</s>
+            <s>To get more information about the certification process, press 2.</s>
+            <s>To access the answers to frequently asked questions, press 3.</s>
+			<s>To fetch sample data from the API, press 4.</s> <!-- Added new menu option to fetch API data -->
+        </prompt>
+
+        <choice next="#unreg_language_select"/>
+        <choice next="#en_process_form"/>
+        <choice next="#en_unreg_faq_form"/>
+		<choice dtmf="4" next="#enfetchapidata"/>
+    </menu>
+
+    <!-- Provides information on the application process. Returns to previous menu afterwards. -->
+    <form id="en_process_form">
+        <block>
+            <prompt>
+                <s>This application is used to quickly access the status of your seed certificate applications.</s>
+                <s>To apply for certification, send a sample of your seeds to our laboratory.</s>
+                <s>You can find more information at www.placeholder.net.</s>
+                <s>Once your application has been processed, you can call this number to obtain the results.</s>
+
+                <s>You will now return to the previous menu.</s>
+            </prompt>
+
+            <goto next="#en_unregistered_select"/>
+        </block>
+    </form>
+	
+	<form id="enfetchapidata">
+
+		<data name="apiData" src="https://api.semencescertifiees.elch.cc/test/docuExampleApplicationHeader.xml"/>
+		<script><![CDATA[
+		  var last = apiData.documentElement.getElementsByTagName("last").item(0).firstChild.data;
+		  var ticker = apiData.documentElement.getElementsByTagName("ticker").item(0).firstChild.data;
+		  var name = apiData.documentElement.getElementsByTagName("name").item(0).firstChild.data;
+		  var change = apiData.documentElement.getElementsByTagName("change").item(0).firstChild.data;
+		]]></script>
+		
+		<catch event="error.badfetch">
+		  <prompt>
+			<s>There was a problem fetching the data. Please check the URL and try again.</s>
+		  </prompt>
+		  <exit/>
+		</catch>
+
+		<catch event="error.unsupported.fetchmode">
+		  <prompt>
+			<s>The fetch mode is not supported by the platform. Please contact support for assistance.</s>
+		  </prompt>
+		  <exit/>
+		</catch>
+
+		<catch event="error.unsupported.format">
+		  <prompt>
+			<s>The fetched document format is not supported. Please ensure the document is in a supported format.</s>
+		  </prompt>
+		  <exit/>
+		</catch>
+
+		<catch event="error.semantic">
+		  <prompt>
+			<s>There is a semantic error in the fetched document. Please check the document for errors and correct them.</s>
+			<s>Problem is <value expr="_event.message"/>.</s>
+		  </prompt>
+		  <exit/>
+		</catch>
+
+		
+		<block>
+		  <prompt>
+			<s>The information from the API is as follows:</s>
+			<s>The ticker is <value expr="ticker"/></s>
+			<s>The name is <value expr="name"/></s>
+			<s>The change is <value expr="change"/></s>
+			<s>The last is <value expr="last"/></s>
+		  </prompt>
+		  
+		  <exit/>
+		</block>
+
+	</form>
+
+    <!-- An FAQ menu for unregistered users. -->
+    <menu id="en_unreg_faq_form" dtmf="true"> <!-- TODO: more options? -->
+        <prompt>
+            <s>You now get a list of frequently asked questions. Please press the number corresponding to your problem.</s>
+            <s>To return to the previous menu, press 1.</s>
+            <s>If your phone number is not recognized, press 2.</s>
+            <s>If you want to know how to register, press 3.</s>
+            <s>If you have another problem, press 4.</s>
+        </prompt>
+
+        <choice next="#en_unregistered_select"/>
+        <choice next="#en_phone_form"/>
+        <choice next="#en_process_form"/>
+        <choice next="#en_otherproblem_unreg_form"/>
+    </menu>
+	
+
+    <!-- FAQ answer: Explains why one's phone number may not be recognized by the system. -->
+    <form id="en_phone_form">
+        <block>
+            <prompt>
+                <s>You can only call with your own phone, with which you applied for certification. Make sure to use your own phone.</s>
+                <s>If you changed your phone number, you need to contact us by mail so that we can register your new number in the system.</s>
+                <s>Certification results will appear once processed. If your application is still pending, your phone number may not have been registered yet. Please be patient.</s>
+            
+                <s>You will now return to the previous menu.</s>
+            </prompt>
+
+            <goto next="#en_unreg_faq_form"/>
+        </block>
+    </form>
+	
+    <!-- FAQ answer: Explains how to reach out in case of other problems. -->
+    <form id="en_otherproblem_unreg_form">
+        <block>
+            <prompt>
+                <s>If you have another problem, please contact us by mail.</s>
+                <s>Our apologies for the inconcenience.</s>
+
+                <s>You will now return to the previous menu.</s>
+            </prompt>
+
+            <goto next="#en_unreg_faq_form"/>
+        </block>
+    </form>
+
+    <!-- English menu for registered users. Contains return, listing certificates and FAQ options. -->
+    <menu id="en_farmer_select" dtmf="true">
+        <prompt>
+            <s>Welcome, <value expr="session.telephone.ani"/>. Please choose one of the following options.</s> 
+            <s>To return to the previous menu, press 1.</s>
+            <s>To retrieve information on a certificate, press 2.</s>
+            <s>To access the answers to frequently asked questions, press 3.</s>
+        </prompt>
+
+        <choice next="#reg_language_select"/>
+        <choice next="#en_cert_form"/>
+        <choice next="#en_reg_faq_form"/>
+		
+    </menu>
+
+    <!-- Selection menu for retrieving information about any of the processed certificate applications. Contains a 'return' option. -->
+    <menu id="en_cert_form" dtmf="true"> 
+        <prompt>
+            <s>You now get a list of your processed certificate applications.</s>
+            <s>Please press the number corresponding to the certificate you want to know the status of.</s>
+            <s>To return to the previous menu, press 1.</s>
+            <s>To get the status of certificate 1, press 2.</s>
+        </prompt>
+
+        <!-- TODO: choices -->
+        <choice next="#en_farmer_select"/>
+        <choice next="#encert1form"/> <!--placeholder -->
+    </menu>
+
+    <!-- Placeholder certificate -->
+    <form id="encert1form">
+        <block>
+            <prompt>
+                <s>Your application has been approved.</s>
+
+                <s>You will now return to the previous menu.</s>
+            </prompt>
+
+            <goto next="#en_cert_form"/>
+        </block>
+    </form>
+
+    <!-- An FAQ menu for registered users. Contains a 'return' option. -->
+    <menu id="en_reg_faq_form" dtmf="true"> <!-- TODO: more options? -->
+        <prompt>
+            <s>You now get a list of frequently asked questions. Please press the number corresponding to your problem.</s>
+            <s>To return to the previous menu, press 1.</s>
+            <s>If you want to know how to download or print a certificate, press 2.</s>
+            <s>If one of your certificates is missing from the list, press 3.</s>
+            <s>If you have another problem, press 4.</s>
+        </prompt>
+
+        <choice next="#en_farmer_select"/>
+        <choice next="#en_download_form"/>
+        <choice next="#en_missing_cert_form"/>
+        <choice next="#en_otherproblem_reg_form"/>
+    </menu>
+
+    <!-- FAQ answer: Provides information on downloading certificates from approved applications. -->
+    <form id="en_download_form">
+        <block>
+            <prompt>
+                <s>Downloading a certificate to print can be done at our web application.</s>
+                <s>Go to www.semencescertifiees.net.</s>
+                <s>Obtain access by entering your phone number and your personal four-digit pincode.</s>
+
+                <s>You will now return to the previous menu.</s>
+            </prompt>
+
+            <goto next="#en_reg_faq_form"/>
+        </block>
+    </form>
+
+    <!-- FAQ answer: Explains why an application may not be listed. -->
+    <form id="en_missing_cert_form">
+        <block>
+            <prompt>
+                <s>Certificates appear in the list once your application has been processed.</s>
+                <s>Most likely, your application is still pending.</s>
+                <s>Please be patient.</s>
+                <s>It should take around 30 days to process your application after we receive it.</s>
+                <s>If you believe it is a mistake, please contact us by mail.</s>
+
+                <s>You will now return to the previous menu.</s>
+            </prompt>
+
+            <goto next="#en_reg_faq_form"/>
+        </block>
+    </form>
+
+    <!-- FAQ answer: Explains how to reach out in case of other problems. -->
+    <form id="en_otherproblem_reg_form">
+        <block>
+            <prompt>
+                <s>If you have another problem, please contact us by mail.</s>
+                <s>Our apologies for the inconcenience.</s>
+
+                <s>You will now return to the previous menu.</s>
+            </prompt>
+
+            <goto next="#en_reg_faq_form"/>
+        </block>
+    </form>
+
+    <form id="fr_farmer_select"> <!-- TODO -->
+        <block>
+            <prompt>
+            <!-- TODO: language can't be defined in 'prompt' -->
+                <s xml:lang="fr">Bienvenue, fermier. Veuillez choisir l'une des options suivantes.</s>
+                <s xml:lang="fr">Pour revenir au menu précédent, appuyez sur 1.</s>
+                <s xml:lang="fr">Pour récupérer des informations sur un certificat, appuyez sur 2.</s>
+                <s xml:lang="fr">Pour accéder aux réponses aux questions fréquemment posées, appuyez sur 3.</s>
+            </prompt>
+        </block>
+    </form>
+
+    <form id="fr_unregistered_select">
+        <block>
+            <prompt>
+                <s>Placeholder.</s>
+            </prompt>
+        </block>
+    </form>
+</vxml>
